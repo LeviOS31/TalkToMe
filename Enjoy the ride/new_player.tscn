@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Action RPG Resources/Player/newplayer/Player/Player.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends KinematicBody2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+#
+#
+## Called when the node enters the scene tree for the first time.
+func _ready():
+	$AnimationPlayer.play(\"attack\")
+#	$AnimationPlayer2.play(\"roll_right\")
+#	$AnimationPlayer3.play(\"roll_up\")
+#	$AnimationPlayer4.play(\"roll_down\")
+#
+"
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 22.0
+
+[node name="new_player" type="KinematicBody2D"]
+script = SubResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D"]
+position = Vector2( 0, 11 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 65
+frame = 64
