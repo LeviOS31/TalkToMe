@@ -6,12 +6,21 @@ public class menu : Control
 	bool pressed = false;
 	bool movetoggle = false;
 
+	Godot.Object speechtotextobj;
+
 	public override void _Ready()
 	{
-		Button buttonstart = GetNode("transitionscene/VBoxContainer/startButton") as Button;
-		buttonstart.GrabFocus();
+		
 	}
 
+	public override void _Process(float delta)
+	{
+		if (Input.IsActionJustPressed("Talk"))
+		{
+			_on_startButton_pressed();
+		}
+	}
+	
 
 	public override void _PhysicsProcess(float delta)
 	{
@@ -30,7 +39,7 @@ public class menu : Control
 		}
 		if (transitiontimer.TimeLeft < 0.1 && transitiontimer.TimeLeft > 0.000001)
 		{
-			GetTree().ChangeScene("res://addons/speechtotext/Example.tscn");
+			GetTree().ChangeScene("res://alltest.tscn");
 		}
 	}
 
@@ -48,10 +57,7 @@ public class menu : Control
 		Timer timer = GetNode("player/Timer") as Timer;
 		timer.Start();
 	}
-	private void _on_exitButton_pressed()
-	{
-		GetTree().Quit();
-	}
+
 	private void _on_Timer_timeout()
 	{
 		transitionscene transition = GetNode("transitionscene") as transitionscene;

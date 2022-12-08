@@ -647,3 +647,6 @@ parameters/block/blend_position = Vector2( 0.0017271, -0.0782427 )
 parameters/idle/blend_position = Vector2( 0, 1 )
 parameters/roll/blend_position = Vector2( 0, 1 )
 parameters/run/blend_position = Vector2( 0, 1 )
+
+[node name="movetimer" type="Timer" parent="."]
+wait_time = 0.5

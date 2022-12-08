@@ -15,14 +15,7 @@ public class transitionscene : CanvasLayer
 
 	public void transition_to_normal()
 	{
-		var container = GetNode<Control>("VBoxContainer");
-		var buttonstart = container.GetNode<Button>("VBoxContainer/startButton");
-		var buttonexit = container.GetNode<Button>("VBoxContainer/exitButton");
 		var Animation = GetNode<AnimationPlayer>("AnimationPlayer");
-
-		container.Visible = false;
-		buttonstart.Visible = false;
-		buttonexit.Visible = false;
 		Animation.Play("fade_to_normal");
 	}
 	private void _on_AnimationPlayer_animation_finished(String anim_name)

@@ -1,0 +1,129 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.7.2": {
+      "Godot.NET.Sdk/3.3.0": {
+        "type": "package"
+      },
+      "System.Speech/7.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Speech"
+        ],
+        "compile": {
+          "lib/net462/_._": {}
+        },
+        "runtime": {
+          "lib/net462/_._": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Godot.NET.Sdk/3.3.0": {
+      "sha512": "UYcoKtvNEPLKHEwvHxm/ofoSxFHfkBaTziawl5MFnZqsuF2+JFbJDTab+ulC2f8dpqauFpMkCEHAnvGSI/IRCA==",
+      "type": "package",
+      "path": "godot.net.sdk/3.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Sdk/Sdk.props",
+        "Sdk/Sdk.targets",
+        "godot.net.sdk.3.3.0.nupkg.sha512",
+        "godot.net.sdk.nuspec"
+      ]
+    },
+    "System.Speech/7.0.0": {
+      "sha512": "7E0uB92Cx2sXR67HW9rMKJqDACdLuz9t3I3OwZUFDzAgwKXWuY6CYeRT/NiypHcyZO2be9+0H0w0M6fn7HQtgQ==",
+      "type": "package",
+      "path": "system.speech/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Speech.targets",
+        "lib/net462/_._",
+        "lib/net6.0/System.Speech.dll",
+        "lib/net6.0/System.Speech.xml",
+        "lib/net7.0/System.Speech.dll",
+        "lib/net7.0/System.Speech.xml",
+        "lib/netstandard2.0/System.Speech.dll",
+        "lib/netstandard2.0/System.Speech.xml",
+        "runtimes/win/lib/net6.0/System.Speech.dll",
+        "runtimes/win/lib/net6.0/System.Speech.xml",
+        "runtimes/win/lib/net7.0/System.Speech.dll",
+        "runtimes/win/lib/net7.0/System.Speech.xml",
+        "system.speech.7.0.0.nupkg.sha512",
+        "system.speech.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.7.2": [
+      "Godot.NET.Sdk >= 3.3.0",
+      "System.Speech >= 7.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\levio\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\levio\\Documents\\Enjoy the ride\\Enjoy the ride.csproj",
+      "projectName": "Enjoy the ride",
+      "projectPath": "C:\\Users\\levio\\Documents\\Enjoy the ride\\Enjoy the ride.csproj",
+      "packagesPath": "C:\\Users\\levio\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\levio\\Documents\\Enjoy the ride\\.mono\\temp\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\levio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net472"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net472": {
+        "targetAlias": "net472",
+        "dependencies": {
+          "Godot.NET.Sdk": {
+            "target": "Package",
+            "version": "[3.3.0, )"
+          },
+          "System.Speech": {
+            "target": "Package",
+            "version": "[7.0.0, )"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

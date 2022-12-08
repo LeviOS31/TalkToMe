@@ -18,5 +18,5 @@ func start():
 func stop_and_get_result():
 	speech_to_text.stop()
 	while not speech_to_text.recognition_finished():
-		yield(get_tree(), "idle_frame")
+		var i = 1;
 	return speech_to_text.get_result()

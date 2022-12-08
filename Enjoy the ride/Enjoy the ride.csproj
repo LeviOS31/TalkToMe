@@ -1,0 +1,10 @@
+<Project Sdk="Godot.NET.Sdk/3.3.0">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>bluemage</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Godot.NET.Sdk" Version="3.3.0" />
+    <PackageReference Include="System.Speech" Version="7.0.0" />
+  </ItemGroup>
+</Project>
