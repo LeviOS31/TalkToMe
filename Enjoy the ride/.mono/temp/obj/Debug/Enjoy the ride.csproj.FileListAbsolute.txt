@@ -7,3 +7,11 @@ C:\Users\levio\Documents\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.Asse
 C:\Users\levio\Documents\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.csproj.CoreCompileInputs.cache
 C:\Users\levio\Documents\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.dll
 C:\Users\levio\Documents\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.pdb
+C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\bin\Debug\Enjoy the ride.dll
+C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\bin\Debug\Enjoy the ride.pdb
+C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.csprojAssemblyReference.cache
+C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.AssemblyInfoInputs.cache
+C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.AssemblyInfo.cs
+C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.csproj.CoreCompileInputs.cache
+C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.dll
+C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.pdb

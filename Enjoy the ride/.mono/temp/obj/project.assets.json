@@ -69,24 +69,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\levio\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\LevioldeScheper\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\levio\\Documents\\Enjoy the ride\\Enjoy the ride.csproj",
+      "projectUniqueName": "C:\\Users\\LevioldeScheper\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj",
       "projectName": "Enjoy the ride",
-      "projectPath": "C:\\Users\\levio\\Documents\\Enjoy the ride\\Enjoy the ride.csproj",
-      "packagesPath": "C:\\Users\\levio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\levio\\Documents\\Enjoy the ride\\.mono\\temp\\obj\\",
+      "projectPath": "C:\\Users\\LevioldeScheper\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj",
+      "packagesPath": "C:\\Users\\LevioldeScheper\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LevioldeScheper\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\.mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\levio\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\LevioldeScheper\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -94,7 +89,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -122,7 +116,7 @@
             "version": "[7.0.0, )"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }
