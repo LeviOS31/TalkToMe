@@ -4,7 +4,6 @@ using System.Linq;
 
 public class all : Control
 {
-	
 	enum load 
 	{
 		Battle,
@@ -37,6 +36,10 @@ public class all : Control
 				case load.World:
 					worldinstance = world.Instance();
 					AddChild(worldinstance);
+					foreach (dragon N in worldinstance.GetNode<Node>("YSort/enemies").GetChildren())
+					{
+						N.Connect("touched", this, "start_battle");
+					}
 					if (playerlocation != new Vector2(0,0))
 					{
 						worldinstance.GetNode<player>("YSort/player").Position = playerlocation;
@@ -111,6 +114,11 @@ public class all : Control
 				}
 			}
 		}
+	}
+
+	public void start_battle( Node sender)
+	{
+		GD.Print("touched :" + sender.Name);
 	}
 
 }

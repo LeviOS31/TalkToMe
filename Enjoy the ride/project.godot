@@ -122,6 +122,11 @@ Talk={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="enemie"
+
 [mono]
 
 project/assembly_name="Enjoy the ride"
