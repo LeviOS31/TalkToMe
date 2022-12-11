@@ -162,7 +162,7 @@ position = Vector2( -11, 45 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 2
+frame = 3
 playing = true
 
 [node name="birdsanimation2" type="AnimatedSprite" parent="birds"]
@@ -170,7 +170,7 @@ position = Vector2( -19, 35 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 2
+frame = 3
 playing = true
 
 [node name="birdsanimation3" type="AnimatedSprite" parent="birds"]
@@ -178,7 +178,7 @@ position = Vector2( -73, 42 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 2
+frame = 3
 playing = true
 
 [node name="birdsanimation4" type="AnimatedSprite" parent="birds"]
@@ -186,7 +186,7 @@ position = Vector2( -58, 23 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 2
+frame = 3
 playing = true
 
 [node name="birdsanimation5" type="AnimatedSprite" parent="birds"]
@@ -194,7 +194,7 @@ position = Vector2( -118, 20 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 1
+frame = 2
 playing = true
 
 [node name="birdsanimation6" type="AnimatedSprite" parent="birds"]
@@ -202,7 +202,7 @@ position = Vector2( -259, 47 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 1
+frame = 2
 playing = true
 
 [node name="birdsanimation7" type="AnimatedSprite" parent="birds"]
@@ -210,6 +210,7 @@ position = Vector2( -267, 28 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
+frame = 1
 playing = true
 
 [node name="birdsanimation8" type="AnimatedSprite" parent="birds"]
@@ -217,6 +218,7 @@ position = Vector2( -313, 52 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
+frame = 1
 playing = true
 
 [node name="birdsanimation9" type="AnimatedSprite" parent="birds"]
@@ -224,7 +226,6 @@ position = Vector2( -293, 13 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 3
 playing = true
 
 [node name="birdsanimation10" type="AnimatedSprite" parent="birds"]
@@ -232,7 +233,6 @@ position = Vector2( -391, 15 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 3
 playing = true
 
 [node name="birdsanimation11" type="AnimatedSprite" parent="birds"]
@@ -240,7 +240,7 @@ position = Vector2( -417, 37 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 2
+frame = 3
 playing = true
 
 [node name="birdsanimation12" type="AnimatedSprite" parent="birds"]
@@ -248,7 +248,7 @@ position = Vector2( -431, 16 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 2
+frame = 3
 playing = true
 
 [node name="birdsanimation13" type="AnimatedSprite" parent="birds"]
@@ -256,7 +256,7 @@ position = Vector2( -464, 40 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 1
+frame = 2
 playing = true
 
 [node name="birdsanimation15" type="AnimatedSprite" parent="birds"]
@@ -264,6 +264,7 @@ position = Vector2( -511, 49 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
+frame = 1
 playing = true
 
 [node name="birdsanimation16" type="AnimatedSprite" parent="birds"]
@@ -271,6 +272,7 @@ position = Vector2( -520, 30 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
+frame = 1
 playing = true
 
 [node name="birdsanimation17" type="AnimatedSprite" parent="birds"]
@@ -278,6 +280,7 @@ position = Vector2( -546, 13 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
+frame = 1
 playing = true
 
 [node name="birdsanimation18" type="AnimatedSprite" parent="birds"]
@@ -285,6 +288,7 @@ position = Vector2( -547, 29 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
+frame = 1
 playing = true
 
 [node name="birdsanimation19" type="AnimatedSprite" parent="birds"]
@@ -292,7 +296,6 @@ position = Vector2( -596, 25 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 3
 playing = true
 
 [node name="birdsanimation20" type="AnimatedSprite" parent="birds"]
@@ -300,7 +303,6 @@ position = Vector2( -588, 36 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 3
 playing = true
 
 [node name="birdsanimation21" type="AnimatedSprite" parent="birds"]
@@ -308,7 +310,6 @@ position = Vector2( -660, 20 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 3
 playing = true
 
 [node name="birdsanimation22" type="AnimatedSprite" parent="birds"]
@@ -316,7 +317,7 @@ position = Vector2( -637, 25 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 2
+frame = 3
 playing = true
 
 [node name="birdsanimation23" type="AnimatedSprite" parent="birds"]
@@ -324,7 +325,7 @@ position = Vector2( -651, 34 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 1
+frame = 2
 playing = true
 
 [node name="birdsanimation24" type="AnimatedSprite" parent="birds"]
@@ -332,6 +333,7 @@ position = Vector2( -676, 26 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
+frame = 1
 playing = true
 
 [node name="birdsanimation25" type="AnimatedSprite" parent="birds"]
@@ -339,7 +341,7 @@ position = Vector2( -733, 21 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 1
+frame = 2
 playing = true
 
 [node name="birdsanimation26" type="AnimatedSprite" parent="birds"]
@@ -347,6 +349,7 @@ position = Vector2( -721, 36 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
+frame = 1
 playing = true
 
 [node name="birdsanimation27" type="AnimatedSprite" parent="birds"]
@@ -354,6 +357,7 @@ position = Vector2( -748, 27 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
+frame = 1
 playing = true
 
 [node name="birdsanimation14" type="AnimatedSprite" parent="birds"]
@@ -361,7 +365,7 @@ position = Vector2( -493, 18 )
 scale = Vector2( 0.359375, 0.359375 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 1
+frame = 2
 playing = true
 
 [node name="tree" type="AnimatedSprite" parent="."]
