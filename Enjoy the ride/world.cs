@@ -14,14 +14,4 @@ public class world : Node2D
 	{
 		GetNode<player>("YSort/player").GetInput(direction);
 	}
-
-	public void pause()
-	{
-		GetTree().Paused = true;
-	}
-
-	public void unpause()
-	{
-		GetTree().Paused = false;
-	}
 }

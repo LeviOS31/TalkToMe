@@ -14,6 +14,11 @@ config/name="Enjoy the ride"
 run/main_scene="res://menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Global.cs"
+GM="*res://Global.tscn"
+
 [display]
 
 window/size/width=320

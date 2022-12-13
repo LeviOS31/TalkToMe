@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LevioldeScheper\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj": {}
+    "C:\\Users\\levio\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LevioldeScheper\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj": {
+    "C:\\Users\\levio\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LevioldeScheper\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj",
+        "projectUniqueName": "C:\\Users\\levio\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj",
         "projectName": "Enjoy the ride",
-        "projectPath": "C:\\Users\\LevioldeScheper\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj",
-        "packagesPath": "C:\\Users\\LevioldeScheper\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LevioldeScheper\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\.mono\\temp\\obj\\",
+        "projectPath": "C:\\Users\\levio\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj",
+        "packagesPath": "C:\\Users\\levio\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\levio\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\LevioldeScheper\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\levio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

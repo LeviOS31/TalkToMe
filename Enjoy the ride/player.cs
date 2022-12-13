@@ -3,9 +3,16 @@ using System;
 
 public class player : KinematicBody2D
 {
+
+	private Global g;
 	[Export] public int speed = 100;
 
 	public Vector2 velocity = new Vector2();
+
+	public override void _Ready()
+	{
+		g = GetNode<Global>("/root/GM");
+	}
 
 	public void GetInput(string move)
 	{
@@ -72,13 +79,16 @@ public class player : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		move();
-		velocity = MoveAndSlide(velocity);
-		Timer movetimer = GetNode<Timer>("movetimer");
-		if(movetimer.TimeLeft < 0.01 && movetimer.TimeLeft > 0.000001)
+		if (g.scene == "world")
 		{
-			velocity.x = 0;
-			velocity.y = 0;
+			move();
+			velocity = MoveAndSlide(velocity);
+			Timer movetimer = GetNode<Timer>("movetimer");
+			if(movetimer.TimeLeft < 0.01 && movetimer.TimeLeft > 0.000001)
+			{
+				velocity.x = 0;
+				velocity.y = 0;
+			}
 		}
 	}
 }

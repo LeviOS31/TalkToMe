@@ -4,6 +4,8 @@ using System.Linq;
 
 public class all : Control
 {
+	
+	private Global g;
 	enum load 
 	{
 		Battle,
@@ -17,6 +19,8 @@ public class all : Control
 
 	private Node enemy;
 
+	private Node battlenode;
+
 	private load _currentload;
 
 	private Vector2 playerlocation = new Vector2(0,0);
@@ -28,7 +32,7 @@ public class all : Control
 			load previousload = _currentload;
 			_currentload = value;
 			Node worldinstance;
-			Node battlenode;
+
 			battle battlescript;
 
 			if (previousload == load.World)
@@ -48,9 +52,8 @@ public class all : Control
 					{
 						worldinstance = GetNode("world");
 						GetNode<Node2D>("world").Show();
-						GetNode<Node2D>("world").GetNode<world>("world").unpause();
 					}
-					worldinstance.GetNode<Camera2D>("Worldcam").Current = true;
+					worldinstance.GetNode<Camera2D>("playercam").Current = true;
 					foreach (dragon N in worldinstance.GetNode<Node>("YSort/enemies").GetChildren())
 					{
 						N.Connect("touched", this, "start_battle");
@@ -59,19 +62,22 @@ public class all : Control
 					{
 						worldinstance.GetNode<player>("YSort/player").Position = playerlocation;
 					}
+					g.scene = "world";
 					break;
 				case load.Menu:
+					g.scene = "menu";
 					break;
 				case load.Map:
+					g.scene = "map";
 					break;
 				case load.Battle:
 					GetNode<Node2D>("world").Hide();
-					GetNode<world>("world").pause();
 					battlenode = battle.Instance();
 					battlenode.GetNode<Camera2D>("Battlecam").Current = true;
 					AddChild(battlenode);
 					battlescript = battlenode as battle;
-					battlescript.enemy(enemy);
+					battlescript.spawnenemy(enemy);
+					g.scene = "battle";
 					break;
 			}
 		}
@@ -81,8 +87,10 @@ public class all : Control
 
 	public override void _Ready()
 	{
+		g = GetNode<Global>("/root/GM");
 		battle = GD.Load<PackedScene>("res://battle/battle.tscn");
 		world = GD.Load<PackedScene>("res://world.tscn");
+		Currentload = load.World;
 		GDScript speechtotext = (GDScript) GetNode("SpeechToText").Get("script");
 		speechtotextobj = (Godot.Object) speechtotext.New();
 		speechtotextobj.Call("init");
@@ -91,7 +99,6 @@ public class all : Control
 
 		}
 		GD.Print("godot-speech-to-text plugin loaded");
-		Currentload = load.World;
 	}
 
 // block B L AO K

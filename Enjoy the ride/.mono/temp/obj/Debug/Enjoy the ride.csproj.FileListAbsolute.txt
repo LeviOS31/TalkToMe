@@ -16,3 +16,12 @@ C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj
 C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.pdb
 C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.csproj.AssemblyReference.cache
 C:\Users\LevioldeScheper\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\levio\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\bin\Debug\Enjoy the ride.dll
+C:\Users\levio\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\bin\Debug\Enjoy the ride.pdb
+C:\Users\levio\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.csproj.AssemblyReference.cache
+C:\Users\levio\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\levio\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.AssemblyInfoInputs.cache
+C:\Users\levio\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.AssemblyInfo.cs
+C:\Users\levio\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.csproj.CoreCompileInputs.cache
+C:\Users\levio\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.dll
+C:\Users\levio\Documents\GitHub\TalkToMe\Enjoy the ride\.mono\temp\obj\Debug\Enjoy the ride.pdb
