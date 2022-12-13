@@ -12,6 +12,7 @@ public class world : Node2D
 
 	public void move(string direction)
 	{
+		GD.Print("move: " + direction);
 		GetNode<player>("YSort/player").GetInput(direction);
 	}
 }

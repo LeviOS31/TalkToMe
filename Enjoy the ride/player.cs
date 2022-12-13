@@ -16,6 +16,7 @@ public class player : KinematicBody2D
 
 	public void GetInput(string move)
 	{
+		GD.Print(g.scene);
 		velocity = new Vector2();
 
 		if (move == "right")
@@ -45,6 +46,7 @@ public class player : KinematicBody2D
 		
 		velocity = velocity.Normalized() * speed;
 
+		GD.Print("moved: " + move);
 		Timer movetimer = GetNode<Timer>("movetimer");
 		movetimer.Start();
 	}
@@ -66,12 +68,14 @@ public class player : KinematicBody2D
 		{
 			GetNode<Sprite>("Sprite").Frame = 0;
 			velocity.y += 1;
+			GD.Print("y: " + this.Transform.origin.y);
 		}
 
 		if (Input.IsActionPressed("up"))
 		{
 			GetNode<Sprite>("Sprite").Frame = 1;
 			velocity.y -= 1;
+			GD.Print("y: " + this.Transform.origin.y);
 		}
 
 		velocity = velocity.Normalized() * speed;
@@ -83,12 +87,14 @@ public class player : KinematicBody2D
 		{
 			move();
 			velocity = MoveAndSlide(velocity);
-			Timer movetimer = GetNode<Timer>("movetimer");
-			if(movetimer.TimeLeft < 0.01 && movetimer.TimeLeft > 0.000001)
-			{
-				velocity.x = 0;
-				velocity.y = 0;
-			}
+			Timer movetimer = GetNode<Timer>("movetimer"); 
 		}
 	}
+	private void _on_movetimer_timeout()
+	{
+		velocity.x = 0;
+		velocity.y = 0;
+	}
 }
+
+

@@ -1,13 +1,31 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://world.cs" type="Script" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Pixel Art Achtergronden/SouvenirShop.png" type="Texture" id=3]
 [ext_resource path="res://Pixel Art Achtergronden/EntranceBackground.png" type="Texture" id=4]
 [ext_resource path="res://Pixel Art Achtergronden/EntranceForeground.png" type="Texture" id=5]
-[ext_resource path="res://addons/speechtotext/SpeechToText.gd" type="Script" id=7]
+[ext_resource path="res://Pixel Art Achtergronden/Bunny.png" type="Texture" id=6]
+[ext_resource path="res://Pixel Art Achtergronden/Entrance.png" type="Texture" id=7]
 [ext_resource path="res://pixel art karakters/draak/dragon.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Pixel Art Achtergronden/Fence.png" type="Texture" id=9]
 [ext_resource path="res://playercam.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Pixel Art Achtergronden/Bushes.png" type="Texture" id=11]
 [ext_resource path="res://transitionscene.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Pixel Art Achtergronden/FallenTree.png" type="Texture" id=13]
+[ext_resource path="res://Pixel Art Achtergronden/Restrooms.png" type="Texture" id=14]
+[ext_resource path="res://Pixel Art Achtergronden/Fountain.png" type="Texture" id=15]
+[ext_resource path="res://Pixel Art Achtergronden/Map.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Pixel Art Achtergronden/StreetLight2.png" type="Texture" id=17]
+[ext_resource path="res://Pixel Art Achtergronden/Thrashcan.png" type="Texture" id=18]
+[ext_resource path="res://Pixel Art Achtergronden/StreetLight1.png" type="Texture" id=19]
+[ext_resource path="res://Pixel Art Achtergronden/SideFence.png" type="Texture" id=20]
+[ext_resource path="res://Pixel Art Achtergronden/Tree2.png" type="Texture" id=21]
+[ext_resource path="res://Pixel Art Achtergronden/Tree3.png" type="Texture" id=22]
+[ext_resource path="res://Pixel Art Achtergronden/Tree.png" type="Texture" id=23]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 231.5, 17.125 )
 
 [node name="world" type="Node2D"]
 position = Vector2( 224, 192 )
@@ -23,18 +41,31 @@ position = Vector2( 16, 16 )
 [node name="bottomright" parent="playercam/limit" index="1"]
 position = Vector2( 1694, 1096 )
 
-[node name="YSort" type="YSort" parent="."]
-
-[node name="EntranceForeground" type="Sprite" parent="YSort"]
+[node name="EntranceBackground" type="Sprite" parent="."]
 position = Vector2( 626, 358 )
 scale = Vector2( 2, 2 )
-z_index = 3
-texture = ExtResource( 5 )
+z_as_relative = false
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="player" parent="YSort" groups=["Units"] instance=ExtResource( 2 )]
+[node name="EntranceForeground" type="Sprite" parent="."]
+visible = false
+position = Vector2( 625, 358 )
+scale = Vector2( 2, 2 )
+z_index = 6
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 638, 518 )
 scale = Vector2( 1, 1 )
-z_index = 2
+z_as_relative = false
 
 [node name="shadow" parent="YSort/player" index="0"]
 z_index = -1
@@ -45,16 +76,106 @@ z_index = 1
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/player"]
 remote_path = NodePath("../../../playercam")
 
+[node name="Map" parent="YSort" instance=ExtResource( 16 )]
+position = Vector2( 522, 344 )
+
+[node name="FallenTree" type="Sprite" parent="YSort"]
+position = Vector2( 601, 156 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 13 )
+
+[node name="Fence" type="Sprite" parent="YSort"]
+position = Vector2( 625, 358 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 9 )
+
+[node name="Tree3" type="Sprite" parent="YSort"]
+position = Vector2( 1261, -126 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 22 )
+
+[node name="Bushes" type="Sprite" parent="YSort"]
+position = Vector2( 906, 109 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 11 )
+
+[node name="Tree" type="Sprite" parent="YSort"]
+position = Vector2( 1097, -41 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 23 )
+
+[node name="Tree2" type="Sprite" parent="YSort"]
+position = Vector2( 947, -131 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 21 )
+
+[node name="Thrashcan" type="Sprite" parent="YSort"]
+position = Vector2( 901, 368 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 18 )
+
+[node name="SideFence" type="Sprite" parent="YSort"]
+position = Vector2( 625, 358 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 20 )
+
+[node name="Entrance" type="Sprite" parent="YSort"]
+position = Vector2( 625, 358 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 7 )
+
+[node name="Fountain" type="Sprite" parent="YSort"]
+position = Vector2( 825, 235 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 15 )
+
+[node name="StreetLight2" type="Sprite" parent="YSort"]
+position = Vector2( 931, 319 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 17 )
+
+[node name="StreetLight1" type="Sprite" parent="YSort"]
+position = Vector2( 561, 230 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 19 )
+
+[node name="Restrooms" type="Sprite" parent="YSort"]
+position = Vector2( 851, 495 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 14 )
+
+[node name="SouvenirShop" type="Sprite" parent="YSort"]
+position = Vector2( 275, 465 )
+scale = Vector2( 2, 2 )
+z_as_relative = false
+texture = ExtResource( 3 )
+
+[node name="Bunny" type="Sprite" parent="YSort/SouvenirShop"]
+position = Vector2( 177, -54.5 )
+z_as_relative = false
+texture = ExtResource( 6 )
+
 [node name="enemies" type="Node2D" parent="YSort"]
 position = Vector2( 461, 386 )
 
 [node name="dragon" parent="YSort/enemies" instance=ExtResource( 8 )]
-position = Vector2( 281, 62 )
-z_index = 3
+position = Vector2( 281, 61 )
 
 [node name="dragon2" parent="YSort/enemies" instance=ExtResource( 8 )]
-position = Vector2( 43, 63 )
-z_index = 3
+position = Vector2( 43, 62 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2( 5, 5 )
@@ -62,13 +183,73 @@ transform = Transform2D( 1, 0, 0, 1, 5, 5 )
 
 [node name="transitionscene" parent="." instance=ExtResource( 12 )]
 
-[node name="SpeechToText" type="Node" parent="."]
-script = ExtResource( 7 )
+[node name="collision" type="StaticBody2D" parent="."]
+visible = false
 
-[node name="EntranceBackground" type="Sprite" parent="."]
-position = Vector2( 626, 358 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 129, 591 )
+z_index = 3
+polygon = PoolVector2Array( -4, -74, -4, 5, 111, 6, 260, -142, 261, -236, 151, -235 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 785, 579 )
+z_index = 3
+polygon = PoolVector2Array( -3, -48, -3, 4, 74, 4, 173, -93, 172, -155, 107, -154 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 484, 374 )
+z_index = 3
+polygon = PoolVector2Array( -2, -22, -2, 1, 79, 1, 79, -23 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 558, 329 )
+z_index = 3
+polygon = PoolVector2Array( -2, -33, -2, 1, 10, 1, 10, -33 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 928, 407 )
+z_index = 3
+polygon = PoolVector2Array( -2, -33, -2, 1, 10, 1, 10, -33 )
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 893, 390 )
+z_index = 3
+polygon = PoolVector2Array( -6, -30, -2, 1, 21, 1, 24, -30 )
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 744, 277 )
+z_index = 3
+polygon = PoolVector2Array( -2, -23, -2, 1, 69, 14, 95, 14, 165, -1, 165, -23, 94, -46, 69, -46 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collision"]
+position = Vector2( 843.5, 107.125 )
+z_index = 3
+shape = SubResource( 1 )
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 514, 129 )
+z_index = 3
+polygon = PoolVector2Array( -16, 121, 51, 123, 83, 82, 70, 31, 165, -1, 167, -36, 58, -1, 41, -10, 32, -27, -29, -29, -45, -10, -76, -14, -92, 32, -99, 53, -69, 70 )
+
+[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 971, -8 )
+z_index = 3
+polygon = PoolVector2Array( 98, 133, 147, 110, 154, -17, 268, -52, 321, -56, 325, -187, 117, -184, 104, -39 )
+
+[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 1314, 340 )
+z_index = 3
+polygon = PoolVector2Array( -382, 358, 163, -181, 162, -208, -382, 343 )
+
+[node name="CollisionPolygon2D11" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( 815, 695 )
+z_index = 3
+polygon = PoolVector2Array( -928, 3, 116, 3, 116, -12, -928, -13 )
+
+[node name="CollisionPolygon2D12" type="CollisionPolygon2D" parent="collision"]
+position = Vector2( -217, 687 )
+z_index = 3
+polygon = PoolVector2Array( 97, -4, 111, 6, 995, -877, 987, -882 )
 
 [editable path="playercam"]
 [editable path="YSort/player"]

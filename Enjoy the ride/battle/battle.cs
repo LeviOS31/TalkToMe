@@ -12,7 +12,22 @@ public class battle : Node2D
 	}
 
 	private turn _currentturn;
-	private string enemychose;	
+	private string enemyname;
+	private string enemychose;
+
+	private Attack clownattack = new Attack(5, 2, 2, 5, 15);
+	private Defend clowndefend = new Defend(75, 90);
+	private Attack lionattack = new Attack(10, 5, 10, 7, 8);
+	private Defend liondefend = new Defend(85, 80);
+	private Attack pirateattack = new Attack(7, 5, 1, 80, 20);
+	private Defend piratedefend = new Defend(60, 77);
+	private Attack octopusattack = new Attack(14, 5, 8, 14, 9);
+	private Defend octopusdefend = new Defend(100, 50);
+	private Attack ghostattack = new Attack(4, 2, 0, 0, 0);
+	private Defend ghostdefend = new Defend(100, 99);
+	private Attack dragonattack = new Attack(20, 10, 5, 10, 5);
+	private Defend dragondefend = new Defend(90, 87);
+
 	private string playerchose;
 	private Attack playerattack = new Attack(15, 5, 5, 15, 3);
 	private Defend playerdefend = new Defend(100, 80);
@@ -38,23 +53,15 @@ public class battle : Node2D
 	}
 
 
-	private int enemyhealth;
-	private int health;
+	private int enemyhealth = 100;
+	private int playerhealth;
 
 	public turn Currentturn1 { get => _currentturn;}
-
-	// private clownbattle clown;
-	// private lionbattle lion;
-	// private piratebattle pirate;
-	// private octopusbattle octopus;
-	// private ghostbattle ghost;
-	private dragonbattle dragon;
-
 
 	public override void _Ready()
 	{
 		_currentturn = turn.player;
-		health = GetNode<Global>("/root/GM").health;
+		playerhealth = GetNode<Global>("/root/GM").health;
 	}
 
 	public override void _Process(float delta)
@@ -70,75 +77,193 @@ public class battle : Node2D
 		}
 		else if (_currentturn == turn.execute)
 		{
-			int enemydamage;
-			int playerdamage;
-			int defence;
-			if (dragon != null)
+			int enemydamage = 0;
+			int playerdamage = 0;
+			int defence = 0;
+			if (enemychose == "attack")
 			{
-				if (enemychose == "attack")
+				if(enemyname == "clown")
 				{
-					enemydamage = dragon.attacking();
-					if (playerchose == "defend")
-					{
-						defence = playerdefend.calc();
-						int num = 100 - defence;
-						enemydamage = enemydamage / 100 * num;
-					}
-					health -= enemydamage;
-					GetNode<Global>("/root/GM").health = health;
-					GetNode<ProgressBar>("health/ProgressBar").Value = health;
+					enemydamage = clownattack.calc();
 				}
-				else if (playerchose == "attack")
+				else if(enemyname == "lion")
 				{
-					playerdamage = playerattack.calc();
-					if (enemychose == "defend")
-					{
-						defence = dragon.defending();
-						int num = 100 - defence;
-						playerdamage = playerdamage / 100 * num;
-					}
-					dragon.health -= playerdamage;
-					GetNode<ProgressBar>("healthenemy/ProgressBar").Value = dragon.health;
+					enemydamage = lionattack.calc();
 				}
+				else if(enemyname == "pirate")
+				{
+					enemydamage = pirateattack.calc();
+				}
+				else if(enemyname == "octopus")
+				{
+					enemydamage = octopusattack.calc();
+				}
+				else if(enemyname == "ghost")
+				{
+					enemydamage = ghostattack.calc();
+				}
+				else if(enemyname == "dragon")
+				{
+					enemydamage = dragonattack.calc();
+				}
+				if (playerchose == "defend")
+				{
+					defence = playerdefend.calc();
+					int num = 100 - defence;
+					enemydamage = enemydamage / 100 * num;
+				}
+				playerhealth -= enemydamage;
+				GetNode<Global>("/root/GM").health = playerhealth;
 			}
+			if (playerchose == "attack")
+			{
+				playerdamage = playerattack.calc();
+				if (enemychose == "defend")
+				{
+					if(enemyname == "clown")
+					{
+						defence = clowndefend.calc();
+					}
+					else if(enemyname == "lion")
+					{
+						defence = liondefend.calc();
+					}
+					else if(enemyname == "pirate")
+					{
+						defence = piratedefend.calc();
+					}
+					else if(enemyname == "octopus")
+					{
+						defence = octopusdefend.calc();
+					}
+					else if(enemyname == "ghost")
+					{
+						defence = ghostdefend.calc();
+					}
+					else if(enemyname == "dragon")
+					{
+						defence = dragondefend.calc();
+					}
+					int num = 100 - defence;
+					playerdamage = playerdamage / 100 * num;
+				}
+				enemyhealth -= playerdamage;
+			}
+			sethealth(playerhealth, GetNode<ProgressBar>("health/healthbar"));
+			sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/healthbar"));
 		}
+	}
+	private void sethealth(int health, ProgressBar bar)
+	{
+		bar.Value = health;
 	}
 
 	private void enemyattack()
 	{
-		if(dragon != null)
+		if (enemyhealth > 0)
 		{
-			enemychose = dragon.choose();
+			Random random = new Random();
+			int num;
+			num = random.Next(1, 100);
+			if (enemyhealth == 100)
+			{
+				if (num <= 85)
+				{
+					enemychose = "attack";
+				}
+				else
+				{
+					enemychose = "defend";
+				}
+			}
+			else if (enemyhealth > 75)
+			{
+				if (num <= 75)
+				{
+					enemychose = "attack";
+				}
+				else
+				{
+					enemychose = "defend"; 
+				}
+			}
+			else if (enemyhealth > 50)
+			{
+				if (num <= 50)
+				{
+					enemychose = "attack";
+				}
+				else
+				{
+					enemychose = "defend";
+				}
+			}
+			else if (enemyhealth < 50)
+			{
+				if (num <= 30)
+				{
+					enemychose = "attack";
+				}
+				else
+				{
+					enemychose = "defend";
+				}
+			}
 		}
 	}
 	public void spawnenemy(Node enemy)
 	{
 		if(enemy.Name.Contains("clown"))
 		{
-
+			enemyname = "clown";
+			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/clown.tscn"); 
+			Node temp = enemypacked.Instance();
+			GetNode("enemies").AddChild(temp);
+			Node2D enemy2d = (Node2D) temp;
+			enemy2d.Position = new Vector2(200, 115);
 		}
 		else if(enemy.Name.Contains("lion"))
 		{
-
+			enemyname = "lion";
+			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/lion.tscn"); 
+			Node temp = enemypacked.Instance();
+			GetNode("enemies").AddChild(temp);
+			Node2D enemy2d = (Node2D) temp;
+			enemy2d.Position = new Vector2(200, 115);
 		}
 		else if(enemy.Name.Contains("pirate"))
 		{
-
+			enemyname = "pirate";
+			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/pirate.tscn"); 
+			Node temp = enemypacked.Instance();
+			GetNode("enemies").AddChild(temp);
+			Node2D enemy2d = (Node2D) temp;
+			enemy2d.Position = new Vector2(200, 115);
 		}
 		else if(enemy.Name.Contains("octopus"))
 		{
-
+			enemyname = "octopus";
+			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/octopus.tscn"); 
+			Node temp = enemypacked.Instance();
+			GetNode("enemies").AddChild(temp);
+			Node2D enemy2d = (Node2D) temp;
+			enemy2d.Position = new Vector2(200, 115);
 		}
 		else if(enemy.Name.Contains("ghost"))
 		{
-
-		}
-		else if(enemy.Name.Contains("dragon"))
-		{
+			enemyname = "ghost";
 			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/dragon.tscn"); 
 			Node temp = enemypacked.Instance();
 			GetNode("enemies").AddChild(temp);
-			dragon = temp as dragonbattle;
+			Node2D enemy2d = (Node2D) temp;
+			enemy2d.Position = new Vector2(200, 115);
+		}
+		else if(enemy.Name.Contains("dragon"))
+		{
+			enemyname = "dragon";
+			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/dragon.tscn"); 
+			Node temp = enemypacked.Instance();
+			GetNode("enemies").AddChild(temp);
 			Node2D enemy2d = (Node2D) temp;
 			enemy2d.Position = new Vector2(200, 115);
 		}

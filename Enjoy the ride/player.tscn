@@ -10,26 +10,32 @@ radius = 5.76177
 height = 4.60701
 
 [node name="player" type="KinematicBody2D"]
+position = Vector2( 0, 1.42109e-14 )
 scale = Vector2( 0.991907, 0.981942 )
 collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="shadow" type="Sprite" parent="."]
-position = Vector2( 0.246648, 1.05432 )
+position = Vector2( 0.656898, 4.68653 )
 scale = Vector2( 1.03899, 1 )
+z_as_relative = false
 texture = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 9 )
-position = Vector2( 0, -22.4046 )
+position = Vector2( 0.410251, -18.7724 )
+z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 4
 
 [node name="playercollison" type="CollisionShape2D" parent="."]
-position = Vector2( -5.21541e-08, -5.07118 )
+position = Vector2( 0.414414, -1.47546 )
 rotation = 1.5708
 scale = Vector2( -1.414, 1 )
+z_as_relative = false
 shape = SubResource( 1 )
 
 [node name="movetimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[connection signal="timeout" from="movetimer" to="." method="_on_movetimer_timeout"]

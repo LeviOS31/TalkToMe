@@ -98,6 +98,7 @@ public class all : Control
 		{
 
 		}
+		GetNode<AnimatedSprite>("GUI/top/talk").Animation = "off";
 		GD.Print("godot-speech-to-text plugin loaded");
 	}
 
@@ -114,6 +115,7 @@ public class all : Control
 // backwards B AE K W ER D Z
 // left L EH F T
 // right R AY T
+// help HH EH L P
 
 	public override void _Process(float delta)
 	{
@@ -122,6 +124,7 @@ public class all : Control
 			if ((bool)speechtotextobj.Call("can_speak"))
 			{
 				GD.Print("start speaking");
+				GetNode<AnimatedSprite>("GUI/top/talk").Animation = "on";
 				speechtotextobj.Call("start");
 			}
 		}
@@ -130,6 +133,7 @@ public class all : Control
 			if ((bool)speechtotextobj.Call("am_speaking"))
 			{
 				GD.Print("stop speaking");
+				GetNode<AnimatedSprite>("GUI/top/talk").Animation = "off";
 				var result = speechtotextobj.Call("stop_and_get_result");
 				if (result is GDScriptFunctionState)
 				{
@@ -139,7 +143,6 @@ public class all : Control
 				string[] strings = {"forward","backwards","left","right","stop"};
 				if (strings.Any(result.ToString().Contains) && _currentload == load.World)
 				{
-					GD.Print("Move");
 					GetNode<world>("world").move(result.ToString());
 				}
 			}

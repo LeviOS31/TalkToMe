@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "y/HHjpOVuBcUB4uDs00YBnSxTSFQBYlseEEm3/Y84hUzYLhQtdMX7gRCUiaPNnL1b/C4m04hKx6dM18dkZyC5A==",
+  "dgSpecHash": "1kTpunHG8m14G2BImyp6QSoHW0fuXkmWr5ES8V4bSeKMq4irbQido1x+lFkZ1tup3qMXxaovsZNEZAnMw9Au2g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\levio\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj",
+  "projectFilePath": "C:\\Users\\LevioldeScheper\\Documents\\GitHub\\TalkToMe\\Enjoy the ride\\Enjoy the ride.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\levio\\.nuget\\packages\\godot.net.sdk\\3.3.0\\godot.net.sdk.3.3.0.nupkg.sha512",
-    "C:\\Users\\levio\\.nuget\\packages\\system.speech\\7.0.0\\system.speech.7.0.0.nupkg.sha512"
+    "C:\\Users\\LevioldeScheper\\.nuget\\packages\\godot.net.sdk\\3.3.0\\godot.net.sdk.3.3.0.nupkg.sha512",
+    "C:\\Users\\LevioldeScheper\\.nuget\\packages\\system.speech\\7.0.0\\system.speech.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
