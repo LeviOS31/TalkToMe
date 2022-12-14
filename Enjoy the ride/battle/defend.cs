@@ -20,7 +20,9 @@ public class Defend
         int num = random.Next(1, 100);
         if (num > 0 && num < blockchance)
         {
-            return random.Next(40, block);
+            int blocked = random.Next(40, block);
+            GD.Print("blocked: " + blocked);
+            return blocked;
         }
         else
         {

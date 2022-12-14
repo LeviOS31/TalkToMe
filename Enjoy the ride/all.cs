@@ -145,6 +145,13 @@ public class all : Control
 				{
 					GetNode<world>("world").move(result.ToString());
 				}
+				if (_currentload == load.Battle)
+				{
+					if(GetNode<battle>("battle").Playerchose == "")
+					{
+						GetNode<battle>("battle").playerchosen(result.ToString());
+					}
+				}
 			}
 		}
 	}

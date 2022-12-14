@@ -21,10 +21,12 @@ public class player : KinematicBody2D
 
 		if (move == "right")
 		{
+			GetNode<Sprite>("Sprite").Frame = 3;
 			velocity.x += 1;
 		}
 		if (move == "left")
 		{
+			GetNode<Sprite>("Sprite").Frame = 2;
 			velocity.x -= 1;
 		}
 		if (move == "backwards")
@@ -57,10 +59,12 @@ public class player : KinematicBody2D
 
 		if (Input.IsActionPressed("right"))
 		{
+			GetNode<Sprite>("Sprite").Frame = 3;
 			velocity.x += 1;
 		}
 		if (Input.IsActionPressed("left"))
 		{
+			GetNode<Sprite>("Sprite").Frame = 2;
 			velocity.x -= 1;
 		}
 
@@ -68,14 +72,12 @@ public class player : KinematicBody2D
 		{
 			GetNode<Sprite>("Sprite").Frame = 0;
 			velocity.y += 1;
-			GD.Print("y: " + this.Transform.origin.y);
 		}
 
 		if (Input.IsActionPressed("up"))
 		{
 			GetNode<Sprite>("Sprite").Frame = 1;
 			velocity.y -= 1;
-			GD.Print("y: " + this.Transform.origin.y);
 		}
 
 		velocity = velocity.Normalized() * speed;

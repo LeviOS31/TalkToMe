@@ -37,3 +37,6 @@ margin_right = 202.0
 margin_bottom = 43.0
 
 [node name="enemies" type="Node" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5

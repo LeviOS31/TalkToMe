@@ -35,11 +35,13 @@ public class Attack
             if (critchance())
             {
                 damage = random.Next(low, high) * critdamage;
+                GD.Print("damage: " + damage);
                 return damage;
             }
             else
             {
                 damage = random.Next(low, high);
+                GD.Print("damage: " + damage);
                 return damage;
             }
         }

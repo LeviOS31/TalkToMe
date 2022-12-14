@@ -9,11 +9,15 @@ public class battle : Node2D
 		player,
 		enemy,
 		execute,
+		none,
 	}
+
+	[Signal]
+	public delegate void chosen();
 
 	private turn _currentturn;
 	private string enemyname;
-	private string enemychose;
+	private string enemychose = "";
 
 	private Attack clownattack = new Attack(5, 2, 2, 5, 15);
 	private Defend clowndefend = new Defend(75, 90);
@@ -28,7 +32,8 @@ public class battle : Node2D
 	private Attack dragonattack = new Attack(20, 10, 5, 10, 5);
 	private Defend dragondefend = new Defend(90, 87);
 
-	private string playerchose;
+	private string playerchose = "";
+	public string Playerchose { get => playerchose;}
 	private Attack playerattack = new Attack(15, 5, 5, 15, 3);
 	private Defend playerdefend = new Defend(100, 80);
 
@@ -36,18 +41,22 @@ public class battle : Node2D
 	{
 		set
 		{
+			turn previousturn = _currentturn;
 			_currentturn = value;
-			if(_currentturn == turn.player)
+			if (previousturn != _currentturn)
 			{
-				GD.Print("player turn");
-			}
-			if(_currentturn == turn.enemy)
-			{
-				GD.Print("enemy turn");
-			}
-			if(_currentturn == turn.execute)
-			{
-				GD.Print("execute");
+				if(_currentturn == turn.player)
+				{
+					GD.Print("player turn");
+				}
+				if(_currentturn == turn.enemy)
+				{
+					GD.Print("enemy turn");
+				}
+				if(_currentturn == turn.execute)
+				{
+					GD.Print("execute");
+				}
 			}
 		}
 	}
@@ -60,20 +69,24 @@ public class battle : Node2D
 
 	public override void _Ready()
 	{
-		_currentturn = turn.player;
+		Currentturn = turn.player;
 		playerhealth = GetNode<Global>("/root/GM").health;
+
+		sethealth(playerhealth, GetNode<ProgressBar>("health/ProgressBar"));
+		sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
 	}
 
-	public override void _Process(float delta)
+	public override async void _Process(float delta)
 	{
 		if (_currentturn == turn.enemy)
 		{
-			enemyattack();
-			_currentturn = turn.execute;
+			await ToSignal(GetNode<Timer>("Timer"), "timeout");
+			Currentturn = turn.execute;
 		}
 		else if (_currentturn == turn.player)
 		{
-
+			await ToSignal(this, "chosen");
+			Currentturn = turn.enemy; 
 		}
 		else if (_currentturn == turn.execute)
 		{
@@ -110,10 +123,13 @@ public class battle : Node2D
 				{
 					defence = playerdefend.calc();
 					int num = 100 - defence;
-					enemydamage = enemydamage / 100 * num;
+					GD.Print("num: " + num);
+					enemydamage = (int)Math.Ceiling((enemydamage) / 100.00 * (num));
 				}
 				playerhealth -= enemydamage;
 				GetNode<Global>("/root/GM").health = playerhealth;
+				GD.Print("player health: " + playerhealth);
+				GD.Print("damage: " + enemydamage);
 			}
 			if (playerchose == "attack")
 			{
@@ -145,12 +161,17 @@ public class battle : Node2D
 						defence = dragondefend.calc();
 					}
 					int num = 100 - defence;
-					playerdamage = playerdamage / 100 * num;
+					playerdamage = (int)Math.Ceiling((playerdamage) / 100.00 * (num));;
 				}
 				enemyhealth -= playerdamage;
+				GD.Print("enemy health: " + enemyhealth);
+				GD.Print("damage: " + playerdamage);
 			}
-			sethealth(playerhealth, GetNode<ProgressBar>("health/healthbar"));
-			sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/healthbar"));
+			sethealth(playerhealth, GetNode<ProgressBar>("health/ProgressBar"));
+			sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
+			playerchose = "";
+			enemychose = "";
+			Currentturn = turn.player;
 		}
 	}
 	private void sethealth(int health, ProgressBar bar)
@@ -209,6 +230,8 @@ public class battle : Node2D
 					enemychose = "defend";
 				}
 			}
+			GD.Print("enemy chose " + enemychose);
+			GetNode<Timer>("Timer").Start();
 		}
 	}
 	public void spawnenemy(Node enemy)
@@ -267,7 +290,26 @@ public class battle : Node2D
 			Node2D enemy2d = (Node2D) temp;
 			enemy2d.Position = new Vector2(200, 115);
 		}
-		// GD.Print(enemy);
-		// GD.Print(enemy.Call("choose"));
+	}
+
+	public void playerchosen(string result)
+	{
+		GD.Print("result: " + result);
+		if(result == "punch")
+		{
+			playerchose = "attack";
+			EmitSignal("chosen");
+			GD.Print("player chose " + playerchose);
+			enemyattack();
+
+		}
+		else if(result == "block")
+		{
+			playerchose = "defend";
+			EmitSignal("chosen");
+			GD.Print("player chose " + playerchose);
+			enemyattack();
+		}
+		
 	}
 }
