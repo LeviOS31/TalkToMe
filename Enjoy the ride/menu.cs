@@ -3,14 +3,13 @@ using System;
 
 public class menu : Control
 {
+	bool yellow = true;
 	bool pressed = false;
 	bool movetoggle = false;
 
-	Godot.Object speechtotextobj;
-
 	public override void _Ready()
 	{
-		
+		GetNode<Timer>("texttimer").Start();
 	}
 
 	public override void _Process(float delta)
@@ -24,14 +23,9 @@ public class menu : Control
 
 	public override void _PhysicsProcess(float delta)
 	{
-		movemenu clouds = GetNode("clouds") as movemenu;
-		movemenu birbs = GetNode("birds") as movemenu;
 		playermenu player = GetNode("player") as playermenu; 
 		checkpressed();
 		Timer transitiontimer = GetNode<Timer>("transitionscene/Timer");
-
-		clouds.Move(delta, 5);
-		birbs.Move(delta, 20);
 
 		if (movetoggle == true)
 		{
@@ -54,8 +48,10 @@ public class menu : Control
 	public void _on_startButton_pressed()
 	{
 		pressed = true;
-		Timer timer = GetNode("player/Timer") as Timer;
-		timer.Start();
+		GetNode<Timer>("player/Timer").Start();
+		GetNode<Timer>("player/Timer2").Start();
+		GetNode<Label>("Label").QueueFree();
+		GetNode<Timer>("texttimer").Stop();
 	}
 
 	private void _on_Timer_timeout()
@@ -64,7 +60,25 @@ public class menu : Control
 		transition.transition_to_black();
 	}
 
+	private void _on_texttimer_timeout()
+	{
+		Label text = GetNode<Label>("Label");
+		if (yellow)
+		{
+			text.AddColorOverride("font_color", new Color("#fc9e2b"));
+			yellow = false;
+		}
+		else
+		{
+			text.AddColorOverride("font_color", new Color("#fce42b"));
+			yellow = true;
+		}
+		
+		GetNode<Timer>("texttimer").Start();
+	}
 }
+
+
 
 
 

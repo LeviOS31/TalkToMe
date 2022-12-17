@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Action RPG Resources/World/Grass_R.png" type="Texture" id=1]
+[ext_resource path="res://Pixel Art Achtergronden/EntranceCombatBackground.png" type="Texture" id=1]
 [ext_resource path="res://battle/battle.cs" type="Script" id=2]
 [ext_resource path="res://battle/player/player_battle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://healthUI.tscn" type="PackedScene" id=4]
@@ -9,12 +9,10 @@
 [node name="battle" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="background" type="Sprite" parent="."]
-position = Vector2( 161, 90 )
-scale = Vector2( 0.764368, 0.764368 )
+[node name="EntranceCombatBackground" type="Sprite" parent="."]
+position = Vector2( 160, 96 )
+scale = Vector2( 0.730496, 0.730496 )
 texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 249.087, 862.728, 461.167, 261.192 )
 
 [node name="Battlecam" type="Camera2D" parent="."]
 position = Vector2( 160, 90 )
@@ -25,16 +23,16 @@ position = Vector2( 83, 115 )
 [node name="health" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 39.0
-margin_top = 45.0
-margin_right = 39.0
-margin_bottom = 45.0
+margin_left = 43.0
+margin_top = 148.0
+margin_right = 43.0
+margin_bottom = 148.0
 
 [node name="enemyhealth" parent="." instance=ExtResource( 5 )]
-margin_left = 202.0
-margin_top = 43.0
-margin_right = 202.0
-margin_bottom = 43.0
+margin_left = 204.0
+margin_top = 148.0
+margin_right = 204.0
+margin_bottom = 148.0
 
 [node name="enemies" type="Node" parent="."]
 

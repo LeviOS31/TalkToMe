@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/linkerkant titelscherm.png-ff9a750c5d6bc8a084469522cc3d6a93.stex"
+path="res://.import/dummyanimated.png-c5eba75b5e02ef141e353aee34ff22f3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pixel art titelscherm/linkerkant titelscherm.png"
-dest_files=[ "res://.import/linkerkant titelscherm.png-ff9a750c5d6bc8a084469522cc3d6a93.stex" ]
+source_file="res://pixel art karakters/dummy/dummyanimated.png"
+dest_files=[ "res://.import/dummyanimated.png-c5eba75b5e02ef141e353aee34ff22f3.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

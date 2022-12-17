@@ -54,9 +54,13 @@ public class all : Control
 						GetNode<Node2D>("world").Show();
 					}
 					worldinstance.GetNode<Camera2D>("playercam").Current = true;
-					foreach (dragon N in worldinstance.GetNode<Node>("YSort/enemies").GetChildren())
+					// foreach (dragon N in worldinstance.GetNode<Node>("YSort/enemies").GetChildren())
+					// {
+					// 	N.Connect("touched", this, "start_battle");
+					// }
+					foreach (dummy D in worldinstance.GetNode<Node>("YSort/enemies").GetChildren())
 					{
-						N.Connect("touched", this, "start_battle");
+						D.Connect("touched", this, "start_battle");
 					}
 					if (playerlocation != new Vector2(0,0))
 					{

@@ -7,7 +7,7 @@
 [ext_resource path="res://Pixel Art Achtergronden/EntranceForeground.png" type="Texture" id=5]
 [ext_resource path="res://Pixel Art Achtergronden/Bunny.png" type="Texture" id=6]
 [ext_resource path="res://Pixel Art Achtergronden/Entrance.png" type="Texture" id=7]
-[ext_resource path="res://pixel art karakters/draak/dragon.tscn" type="PackedScene" id=8]
+[ext_resource path="res://pixel art karakters/dummy/dummy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Pixel Art Achtergronden/Fence.png" type="Texture" id=9]
 [ext_resource path="res://playercam.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Pixel Art Achtergronden/Bushes.png" type="Texture" id=11]
@@ -91,6 +91,7 @@ texture = ExtResource( 16 )
 [node name="Fence" type="Sprite" parent="YSort"]
 position = Vector2( 625, 358 )
 scale = Vector2( 2, 2 )
+z_index = 2
 z_as_relative = false
 texture = ExtResource( 9 )
 
@@ -134,12 +135,14 @@ texture = ExtResource( 20 )
 [node name="Entrance" type="Sprite" parent="YSort"]
 position = Vector2( 625, 358 )
 scale = Vector2( 2, 2 )
+z_index = 2
 z_as_relative = false
 texture = ExtResource( 7 )
 
 [node name="Fountain" type="Sprite" parent="YSort"]
 position = Vector2( 825, 235 )
 scale = Vector2( 2, 2 )
+z_index = 2
 z_as_relative = false
 texture = ExtResource( 15 )
 
@@ -179,8 +182,9 @@ texture = ExtResource( 6 )
 [node name="enemies" type="Node2D" parent="YSort"]
 position = Vector2( 461, 386 )
 
-[node name="dragon2" parent="YSort/enemies" instance=ExtResource( 8 )]
-position = Vector2( 43, 62 )
+[node name="Dummy" parent="YSort/enemies" instance=ExtResource( 8 )]
+modulate = Color( 0.584314, 0.584314, 0.584314, 1 )
+position = Vector2( 271, 128 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2( 5, 5 )
