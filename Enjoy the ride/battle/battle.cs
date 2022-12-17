@@ -16,6 +16,15 @@ public class battle : Node2D
 	[Signal]
 	public delegate void chosen();
 
+	[Signal]
+	public delegate void playerturn();
+
+	[Signal]
+	public delegate void enemyturn();
+
+	[Signal]
+	public delegate void executeturn();
+
 	private turn _currentturn;
 	private string enemyname;
 	private string enemychose = "";
@@ -42,26 +51,26 @@ public class battle : Node2D
 	{
 		set
 		{
-			turn previousturn = _currentturn;
 			_currentturn = value;
-			if (previousturn != _currentturn)
+			if(_currentturn == turn.player)
 			{
-				if(_currentturn == turn.player)
-				{
-					GD.Print("player turn");
-				}
-				if(_currentturn == turn.enemy)
-				{
-					GD.Print("enemy turn");
-				}
-				if(_currentturn == turn.execute)
-				{
-					GD.Print("execute");
-				}
+				GD.Print("player turn");
+				EmitSignal("playerturn");
+			}
+			if(_currentturn == turn.enemy)
+			{
+				GD.Print("enemy turn");
+				EmitSignal("enemyturn");
+			}
+			if(_currentturn == turn.execute)
+			{
+				GD.Print("execute");
+				EmitSignal("executeturn");
 			}
 		}
 	}
-
+	private float count1;
+	private float count2;
 
 	private int enemyhealth = 100;
 	private int playerhealth;
@@ -70,6 +79,9 @@ public class battle : Node2D
 
 	public override void _Ready()
 	{
+		this.connect("playerturn", this, nameof(playerturn));
+		this.connect("enemyturn", this, nameof(enemyturn));
+		this.connect("executeturn", this, nameof(executeturn));
 		Currentturn = turn.player;
 		playerhealth = GetNode<Global>("/root/GM").health;
 		GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
@@ -80,74 +92,274 @@ public class battle : Node2D
 
 	public override async void _Process(float delta)
 	{
-		if (_currentturn == turn.enemy)
+		// if (_currentturn == turn.enemy)
+		// {
+		// 	await ToSignal(GetNode<Timer>("Timer"), "timeout");
+		// 	Currentturn = turn.execute;
+		// }
+		// else if (_currentturn == turn.player)
+		// {
+		// 	await ToSignal(this, "chosen");
+		// 	Currentturn = turn.enemy; 
+		// }
+		// else if (_currentturn == turn.execute)
+		// {
+		// 	if (playerchose == "attack")
+		// 	{
+		// 		GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
+				
+		// 		count1 += delta;
+
+		// 		GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
+
+		// 		playerdamage = playerattack.calc();
+		// 		if (enemychose == "defend")
+		// 		{
+		// 			if(enemyname == "dummy")
+		// 			{
+		// 				defence = 0;
+		// 			}
+		// 			else if(enemyname == "clown")
+		// 			{
+		// 				defence = clowndefend.calc();
+		// 			}
+		// 			else if(enemyname == "lion")
+		// 			{
+		// 				defence = liondefend.calc();
+		// 			}
+		// 			else if(enemyname == "pirate")
+		// 			{
+		// 				defence = piratedefend.calc();
+		// 			}
+		// 			else if(enemyname == "octopus")
+		// 			{
+		// 				defence = octopusdefend.calc();
+		// 			}
+		// 			else if(enemyname == "ghost")
+		// 			{
+		// 				defence = ghostdefend.calc();
+		// 			}
+		// 			else if(enemyname == "dragon")
+		// 			{
+		// 				defence = dragondefend.calc();
+		// 			}
+		// 			int num = 100 - defence;
+		// 			playerdamage = (int)Math.Ceiling((playerdamage) / 100.00 * (num));
+		// 		}
+		// 		enemyhealth -= playerdamage;
+		// 		GD.Print("enemy health: " + enemyhealth);
+		// 		GD.Print("damage: " + playerdamage);
+		// 		sethealth(playerhealth, GetNode<ProgressBar>("health/ProgressBar"));
+		// 		sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
+		// 		playerchose = "";
+		// 		enemychose = "";
+		// 		playerdamage = 0;
+		// 		enemydefence = 0;
+		// 	}
+		// 	if (enemychose == "attack")
+		// 	{
+		// 		GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
+
+		// 		count2 += delta;
+
+		// 		if(enemyname == "dummy")
+		// 		{
+		// 			enemydamage = 5;
+		// 		}
+		// 		else if(enemyname == "clown")
+		// 		{
+		// 			enemydamage = clownattack.calc();
+		// 		}
+		// 		else if(enemyname == "lion")
+		// 		{
+		// 			enemydamage = lionattack.calc();
+		// 		}
+		// 		else if(enemyname == "pirate")
+		// 		{
+		// 			enemydamage = pirateattack.calc();
+		// 		}
+		// 		else if(enemyname == "octopus")
+		// 		{
+		// 			enemydamage = octopusattack.calc();
+		// 		}
+		// 		else if(enemyname == "ghost")
+		// 		{
+		// 			enemydamage = ghostattack.calc();
+		// 		}
+		// 		else if(enemyname == "dragon")
+		// 		{
+		// 			enemydamage = dragonattack.calc();
+		// 		}
+		// 		if (playerchose == "defend")
+		// 		{
+		// 			defence = playerdefend.calc();
+		// 			int num = 100 - defence;
+		// 			GD.Print("num: " + num);
+		// 			enemydamage = (int)Math.Ceiling((enemydamage) / 100.00 * (num));
+		// 		}
+
+		// 		GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
+
+		// 		playerhealth -= enemydamage;
+		// 		GetNode<Global>("/root/GM").health = playerhealth;
+		// 		GD.Print("player health: " + playerhealth);
+		// 		GD.Print("damage: " + enemydamage);
+		// 		sethealth(playerhealth, GetNode<ProgressBar>("health/ProgressBar"));
+		// 		sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
+		// 		playerchose = "";
+		// 		enemychose = "";
+		// 		enemydamage = 0;
+		// 		playerdefence = 0;
+		// 	}
+
+		// }
+	}
+
+	private async void playerturn()
+	{
+		await ToSignal(this, "chosen");
+		Currentturn = turn.enemy;
+	}
+
+	private async void enemyturn()
+	{
+		enemyattack();
+		await ToSignal(GetNode<Timer>("Timer"), "timeout");
+		Currentturn = turn.execute;
+	}
+
+	private async void executeturn()
+	{
+		int enemydamage = 0;
+		int playerdamage = 0;
+		int playerdefence = 0;
+		int enemydefence = 0;
+
+		if (playerchose == "attack")
 		{
-			await ToSignal(GetNode<Timer>("Timer"), "timeout");
-			Currentturn = turn.execute;
-		}
-		else if (_currentturn == turn.player)
-		{
-			await ToSignal(this, "chosen");
-			Currentturn = turn.enemy; 
-		}
-		else if (_currentturn == turn.execute)
-		{
-			int enemydamage = 0;
-			int playerdamage = 0;
-			int defence = 0;
-			if (enemychose == "attack")
+			GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
+
+			playerdamage = playerattack.calc();
+			if (enemychose == "defend")
 			{
 				if(enemyname == "dummy")
 				{
-					enemydamage = 5;
+					enemydefence = 0;
 				}
 				else if(enemyname == "clown")
 				{
-					enemydamage = clownattack.calc();
+					enemydefence = clowndefend.calc();
 				}
 				else if(enemyname == "lion")
 				{
-					enemydamage = lionattack.calc();
+					enemydefence = liondefend.calc();
 				}
 				else if(enemyname == "pirate")
 				{
-					enemydamage = pirateattack.calc();
+					enemydefence = piratedefend.calc();
 				}
 				else if(enemyname == "octopus")
 				{
-					enemydamage = octopusattack.calc();
+					enemydefence = octopusdefend.calc();
 				}
 				else if(enemyname == "ghost")
 				{
-					enemydamage = ghostattack.calc();
+					enemydefence = ghostdefend.calc();
 				}
 				else if(enemyname == "dragon")
 				{
-					enemydamage = dragonattack.calc();
+					enemydefence = dragondefend.calc();
 				}
-				if (playerchose == "defend")
-				{
-					defence = playerdefend.calc();
-					int num = 100 - defence;
-					GD.Print("num: " + num);
-					enemydamage = (int)Math.Ceiling((enemydamage) / 100.00 * (num));
-					Currentturn = turn.player;
-				}
-				playerhealth -= enemydamage;
-				GetNode<Global>("/root/GM").health = playerhealth;
-				GD.Print("player health: " + playerhealth);
-				GD.Print("damage: " + enemydamage);
+				int num = 100 - enemydefence;
+				playerdamage = (int)Math.Ceiling((playerdamage) / 100.00 * (num));
 			}
-			if (playerchose == "attack")
+			if(enemydefence = 0)
 			{
-				GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
-				
-				GetNode<player_battle>("player").Connect("attack_anim", this, "playeratk_animation_finished");
-				Currentturn = turn.none;
+				GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("HitPlayer").Play("blunt");
+			}else
+			{
+				GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("HitPlayer").Play("defend");
 			}
 
+			await ToSignal(GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer"), "animation_finished");
+			await ToSignal(GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("HitPlayer"), "animation_finished");
+
+			GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
+			GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("HitPlayer").Play("idle");
+			
+			enemyhealth -= playerdamage;
+			GD.Print("enemy health: " + enemyhealth);
+			GD.Print("damage: " + playerdamage);
 		}
+		if (enemychose == "attack")
+		{
+			GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
+
+			if(enemyname == "dummy")
+			{
+				enemydamage = 5;
+			}
+			else if(enemyname == "clown")
+			{
+				enemydamage = clownattack.calc();
+			}
+			else if(enemyname == "lion")
+			{
+				enemydamage = lionattack.calc();
+			}
+			else if(enemyname == "pirate")
+			{
+				enemydamage = pirateattack.calc();
+			}
+			else if(enemyname == "octopus")
+			{
+				enemydamage = octopusattack.calc();
+			}
+			else if(enemyname == "ghost")
+			{
+				enemydamage = ghostattack.calc();
+			}
+			else if(enemyname == "dragon")
+			{
+				enemydamage = dragonattack.calc();
+			}
+			if (playerchose == "defend")
+			{
+				playerdefence = playerdefend.calc();
+				int num = 100 - playerdefence;
+				GD.Print("num: " + num);
+				enemydamage = (int)Math.Ceiling((enemydamage) / 100.00 * (num));
+			}
+
+			if(playerdefence = 0)
+			{
+				GetNode("player").GetNode<AnimationPlayer>("HitPlayer").Play("blunt");
+			}else
+			{
+				GetNode("player").GetNode<AnimationPlayer>("HitPlayer").Play("defend");
+			}
+
+			await ToSignal(GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer"), "animation_finished");
+			await ToSignal(GetNode("player").GetNode<AnimationPlayer>("HitPlayer"), "animation_finished");
+
+			GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
+			GetNode("player").GetNode<AnimationPlayer>("HitPlayer").Play("idle");
+
+			playerhealth -= enemydamage;
+			GetNode<Global>("/root/GM").health = playerhealth;
+			GD.Print("player health: " + playerhealth);
+			GD.Print("damage: " + enemydamage);
+		}
+
+		sethealth(playerhealth, GetNode<ProgressBar>("health/ProgressBar"));
+		sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
+		playerchose = "";
+		enemychose = "";
+		playerdamage = 0;
+		enemydefence = 0;
+		Currentturn = turn.player;
 	}
+
 	private void sethealth(int health, ProgressBar bar)
 	{
 		bar.Value = health;
@@ -217,7 +429,7 @@ public class battle : Node2D
 			Node temp = enemypacked.Instance();
 			GetNode("enemies").AddChild(temp);
 			Node2D enemy2d = (Node2D) temp;
-			enemy2d.Position = new Vector2(240, 125);
+			enemy2d.Position = new Vector2(240, 120);
 		}
 		else if(enemy.Name.Contains("clown"))
 		{
@@ -283,7 +495,6 @@ public class battle : Node2D
 			playerchose = "attack";
 			EmitSignal("chosen");
 			GD.Print("player chose " + playerchose);
-			enemyattack();
 
 		}
 		else if(result == "block")
@@ -291,58 +502,7 @@ public class battle : Node2D
 			playerchose = "defend";
 			EmitSignal("chosen");
 			GD.Print("player chose " + playerchose);
-			enemyattack();
 		}
 		
-	}
-
-	private void playeratk_animation_finished () 
-	{
-		int playerdamage;
-		int defence = 0;
-		GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
-
-		playerdamage = playerattack.calc();
-		if (enemychose == "defend")
-		{
-			if(enemyname == "dummy")
-			{
-				defence = 0;
-			}
-			else if(enemyname == "clown")
-			{
-				defence = clowndefend.calc();
-			}
-			else if(enemyname == "lion")
-			{
-				defence = liondefend.calc();
-			}
-			else if(enemyname == "pirate")
-			{
-				defence = piratedefend.calc();
-			}
-			else if(enemyname == "octopus")
-			{
-				defence = octopusdefend.calc();
-			}
-			else if(enemyname == "ghost")
-			{
-				defence = ghostdefend.calc();
-			}
-			else if(enemyname == "dragon")
-			{
-				defence = dragondefend.calc();
-			}
-			int num = 100 - defence;
-			playerdamage = (int)Math.Ceiling((playerdamage) / 100.00 * (num));;
-		}
-		enemyhealth -= playerdamage;
-		GD.Print("enemy health: " + enemyhealth);
-		GD.Print("damage: " + playerdamage);
-		sethealth(playerhealth, GetNode<ProgressBar>("health/ProgressBar"));
-		sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
-		playerchose = "";
-		enemychose = "";
-		Currentturn = turn.player;
 	}
 }

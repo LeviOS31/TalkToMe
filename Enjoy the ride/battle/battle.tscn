@@ -18,7 +18,7 @@ texture = ExtResource( 1 )
 position = Vector2( 160, 90 )
 
 [node name="player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 83, 115 )
+position = Vector2( 72, 116 )
 
 [node name="health" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
