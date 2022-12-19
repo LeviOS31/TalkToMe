@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Pixel art Special Effects/SpecialEffects.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "blunt"
+
+[sub_resource type="Animation" id=2]
+resource_name = "defend"
+
+[node name="hit" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 81, 15 )
+texture = ExtResource( 1 )
+hframes = 9
+
+[node name="HitPlayer" type="AnimationPlayer" parent="."]
+anims/blunt = SubResource( 1 )
+anims/defend = SubResource( 2 )
