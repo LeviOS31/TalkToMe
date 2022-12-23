@@ -87,7 +87,7 @@ public class player : KinematicBody2D
 	{
 		if (g.scene == "world")
 		{
-			//move();
+			move();
 			velocity = MoveAndSlide(velocity);
 			Timer movetimer = GetNode<Timer>("movetimer"); 
 		}

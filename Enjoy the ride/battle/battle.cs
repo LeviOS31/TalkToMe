@@ -4,6 +4,7 @@ using System;
 
 public class battle : Node2D
 {
+	private PackedScene damagenumbers = (PackedScene)ResourceLoader.Load("res://number.tscn");
 
 	public enum turn
 	{
@@ -15,16 +16,17 @@ public class battle : Node2D
 
 	[Signal]
 	public delegate void chosen();
-
 	[Signal]
-	public delegate void playerturn();
-
+	public delegate void playerturnsignal();
 	[Signal]
-	public delegate void enemyturn();
-
+	public delegate void enemyturnsignal();
 	[Signal]
-	public delegate void executeturn();
+	public delegate void executeturnsignal();
+	[Signal]
+	public delegate void battle_end();
 
+	private string enemyfullname;
+	public string Enemyfullname { get => enemyfullname;}
 	private turn _currentturn;
 	private string enemyname;
 	private string enemychose = "";
@@ -45,6 +47,7 @@ public class battle : Node2D
 	private string playerchose = "";
 	public string Playerchose { get => playerchose;}
 	private Attack playerattack = new Attack(15, 5, 5, 15, 3);
+	private Attack dogattack = new Attack(30, 10, 10, 5, 25);
 	private Defend playerdefend = new Defend(100, 80);
 
 	private turn Currentturn
@@ -55,17 +58,17 @@ public class battle : Node2D
 			if(_currentturn == turn.player)
 			{
 				GD.Print("player turn");
-				EmitSignal("playerturn");
+				EmitSignal("playerturnsignal");
 			}
 			if(_currentturn == turn.enemy)
 			{
 				GD.Print("enemy turn");
-				EmitSignal("enemyturn");
+				EmitSignal("enemyturnsignal");
 			}
 			if(_currentturn == turn.execute)
 			{
 				GD.Print("execute");
-				EmitSignal("executeturn");
+				EmitSignal("executeturnsignal");
 			}
 		}
 	}
@@ -73,15 +76,16 @@ public class battle : Node2D
 	private float count2;
 
 	private int enemyhealth = 100;
+	public int Enemyhealth { get => enemyhealth;}
 	private int playerhealth;
 
 	public turn Currentturn1 { get => _currentturn;}
 
 	public override void _Ready()
 	{
-		this.connect("playerturn", this, nameof(playerturn));
-		this.connect("enemyturn", this, nameof(enemyturn));
-		this.connect("executeturn", this, nameof(executeturn));
+		this.Connect("playerturnsignal", this, nameof(playerturn));
+		this.Connect("enemyturnsignal", this, nameof(enemyturn));
+		this.Connect("executeturnsignal", this, nameof(executeturn));
 		Currentturn = turn.player;
 		playerhealth = GetNode<Global>("/root/GM").health;
 		GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
@@ -90,129 +94,24 @@ public class battle : Node2D
 		sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
 	}
 
-	public override async void _Process(float delta)
+	public override void _Process(float delta)
 	{
-		// if (_currentturn == turn.enemy)
-		// {
-		// 	await ToSignal(GetNode<Timer>("Timer"), "timeout");
-		// 	Currentturn = turn.execute;
-		// }
-		// else if (_currentturn == turn.player)
-		// {
-		// 	await ToSignal(this, "chosen");
-		// 	Currentturn = turn.enemy; 
-		// }
-		// else if (_currentturn == turn.execute)
-		// {
-		// 	if (playerchose == "attack")
-		// 	{
-		// 		GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
-				
-		// 		count1 += delta;
-
-		// 		GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
-
-		// 		playerdamage = playerattack.calc();
-		// 		if (enemychose == "defend")
-		// 		{
-		// 			if(enemyname == "dummy")
-		// 			{
-		// 				defence = 0;
-		// 			}
-		// 			else if(enemyname == "clown")
-		// 			{
-		// 				defence = clowndefend.calc();
-		// 			}
-		// 			else if(enemyname == "lion")
-		// 			{
-		// 				defence = liondefend.calc();
-		// 			}
-		// 			else if(enemyname == "pirate")
-		// 			{
-		// 				defence = piratedefend.calc();
-		// 			}
-		// 			else if(enemyname == "octopus")
-		// 			{
-		// 				defence = octopusdefend.calc();
-		// 			}
-		// 			else if(enemyname == "ghost")
-		// 			{
-		// 				defence = ghostdefend.calc();
-		// 			}
-		// 			else if(enemyname == "dragon")
-		// 			{
-		// 				defence = dragondefend.calc();
-		// 			}
-		// 			int num = 100 - defence;
-		// 			playerdamage = (int)Math.Ceiling((playerdamage) / 100.00 * (num));
-		// 		}
-		// 		enemyhealth -= playerdamage;
-		// 		GD.Print("enemy health: " + enemyhealth);
-		// 		GD.Print("damage: " + playerdamage);
-		// 		sethealth(playerhealth, GetNode<ProgressBar>("health/ProgressBar"));
-		// 		sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
-		// 		playerchose = "";
-		// 		enemychose = "";
-		// 		playerdamage = 0;
-		// 		enemydefence = 0;
-		// 	}
-		// 	if (enemychose == "attack")
-		// 	{
-		// 		GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
-
-		// 		count2 += delta;
-
-		// 		if(enemyname == "dummy")
-		// 		{
-		// 			enemydamage = 5;
-		// 		}
-		// 		else if(enemyname == "clown")
-		// 		{
-		// 			enemydamage = clownattack.calc();
-		// 		}
-		// 		else if(enemyname == "lion")
-		// 		{
-		// 			enemydamage = lionattack.calc();
-		// 		}
-		// 		else if(enemyname == "pirate")
-		// 		{
-		// 			enemydamage = pirateattack.calc();
-		// 		}
-		// 		else if(enemyname == "octopus")
-		// 		{
-		// 			enemydamage = octopusattack.calc();
-		// 		}
-		// 		else if(enemyname == "ghost")
-		// 		{
-		// 			enemydamage = ghostattack.calc();
-		// 		}
-		// 		else if(enemyname == "dragon")
-		// 		{
-		// 			enemydamage = dragonattack.calc();
-		// 		}
-		// 		if (playerchose == "defend")
-		// 		{
-		// 			defence = playerdefend.calc();
-		// 			int num = 100 - defence;
-		// 			GD.Print("num: " + num);
-		// 			enemydamage = (int)Math.Ceiling((enemydamage) / 100.00 * (num));
-		// 		}
-
-		// 		GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
-
-		// 		playerhealth -= enemydamage;
-		// 		GetNode<Global>("/root/GM").health = playerhealth;
-		// 		GD.Print("player health: " + playerhealth);
-		// 		GD.Print("damage: " + enemydamage);
-		// 		sethealth(playerhealth, GetNode<ProgressBar>("health/ProgressBar"));
-		// 		sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
-		// 		playerchose = "";
-		// 		enemychose = "";
-		// 		enemydamage = 0;
-		// 		playerdefence = 0;
-		// 	}
-
-		// }
+		if (playerhealth > 60 )
+		{
+			GetNode<damage>("damage").blood(0);
+		}
+		else if(playerhealth < 60 && playerhealth > 45)
+		{
+			GetNode<damage>("damage").blood(1);
+		}
+		else if(playerhealth < 45 && playerhealth > 25)
+		{
+			GetNode<damage>("damage").blood(2);
+		}
+		else if(playerhealth < 25 && playerhealth > 0)
+		{
+			GetNode<damage>("damage").blood(3);
+		}
 	}
 
 	private async void playerturn()
@@ -235,11 +134,20 @@ public class battle : Node2D
 		int playerdefence = 0;
 		int enemydefence = 0;
 
-		if (playerchose == "attack")
+		if (playerchose == "attack" || playerchose == "shoot")
 		{
-			GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
 
-			playerdamage = playerattack.calc();
+			if(playerchose == "attack")
+			{
+				GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
+				playerdamage = playerattack.calc();
+			}
+			else if (playerchose == "shoot")
+			{
+				GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayerDog").Play("shoot");
+				playerdamage = dogattack.calc();
+			}
+
 			if (enemychose == "defend")
 			{
 				if(enemyname == "dummy")
@@ -273,21 +181,40 @@ public class battle : Node2D
 				int num = 100 - enemydefence;
 				playerdamage = (int)Math.Ceiling((playerdamage) / 100.00 * (num));
 			}
-			if(enemydefence = 0)
+			await ToSignal(GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer"), "animation_finished");
+			GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
+			GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayerDog").Play("idle");
+
+			if (playerdamage > 0)
 			{
-				GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("HitPlayer").Play("blunt");
-			}else
-			{
-				GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("HitPlayer").Play("defend");
+				GetNode("enemies").GetChild(0).GetNode<CPUParticles2D>("blood/CPUParticles2D").Emitting = true;
 			}
 
-			await ToSignal(GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer"), "animation_finished");
-			await ToSignal(GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("HitPlayer"), "animation_finished");
+			if(enemydefence == 0)
+			{
+				if (playerchose == "attack")
+				{
+					GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("hit/HitPlayer").Play("blunt");
+				}
+				// else if (playerchose == "shoot")
+				// {
+				// 	GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("hit/HitPlayer").Play("laser");
+				// }
+			}else
+			{
+				GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("hit/HitPlayer").Play("defend");
+			}
 
-			GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
-			GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("HitPlayer").Play("idle");
-			
+			await ToSignal(GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("hit/HitPlayer"), "animation_finished");
+
+			GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("hit/HitPlayer").Play("none");
+
+			Node text = damagenumbers.Instance();
+			GetNode<Node>("enemies").GetChild(0).AddChild(text);
+			text.GetNode<Label>("Label").Text = playerdamage.ToString();
+
 			enemyhealth -= playerdamage;
+			sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
 			GD.Print("enemy health: " + enemyhealth);
 			GD.Print("damage: " + playerdamage);
 		}
@@ -331,33 +258,45 @@ public class battle : Node2D
 				enemydamage = (int)Math.Ceiling((enemydamage) / 100.00 * (num));
 			}
 
-			if(playerdefence = 0)
+			await ToSignal(GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("AnimationPlayer"), "animation_finished");
+			GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
+
+			if(playerdefence == 0)
 			{
-				GetNode("player").GetNode<AnimationPlayer>("HitPlayer").Play("blunt");
+				GetNode("player").GetNode<AnimationPlayer>("hit/HitPlayer").Play("blunt");
 			}else
 			{
-				GetNode("player").GetNode<AnimationPlayer>("HitPlayer").Play("defend");
+				GetNode("player").GetNode<AnimationPlayer>("hit/HitPlayer").Play("defend");
 			}
 
-			await ToSignal(GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer"), "animation_finished");
-			await ToSignal(GetNode("player").GetNode<AnimationPlayer>("HitPlayer"), "animation_finished");
+			if (enemydamage > 0)
+			{
+				GetNode<CPUParticles2D>("player/blood/CPUParticles2D").Emitting = true;
+			}
 
-			GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
-			GetNode("player").GetNode<AnimationPlayer>("HitPlayer").Play("idle");
+			await ToSignal(GetNode("player").GetNode<AnimationPlayer>("hit/HitPlayer"), "animation_finished");
+
+			GetNode("player").GetNode<AnimationPlayer>("hit/HitPlayer").Play("none");
+
+			Node text = damagenumbers.Instance();
+			GetNode<Node>("player").AddChild(text);
+			text.GetNode<Label>("Label").Text = enemydamage.ToString();
 
 			playerhealth -= enemydamage;
 			GetNode<Global>("/root/GM").health = playerhealth;
 			GD.Print("player health: " + playerhealth);
 			GD.Print("damage: " + enemydamage);
 		}
-
 		sethealth(playerhealth, GetNode<ProgressBar>("health/ProgressBar"));
-		sethealth(enemyhealth, GetNode<ProgressBar>("enemyhealth/ProgressBar"));
 		playerchose = "";
 		enemychose = "";
 		playerdamage = 0;
 		enemydefence = 0;
 		Currentturn = turn.player;
+		if(enemyhealth < 0)
+		{
+			EmitSignal("battle_end");
+		}
 	}
 
 	private void sethealth(int health, ProgressBar bar)
@@ -374,7 +313,7 @@ public class battle : Node2D
 			num = random.Next(1, 100);
 			if (enemyhealth == 100)
 			{
-				if (num <= 85)
+				if (num <= 90)
 				{
 					enemychose = "attack";
 				}
@@ -422,9 +361,11 @@ public class battle : Node2D
 	}
 	public void spawnenemy(Node enemy)
 	{
+		enemyfullname = enemy.Name;
 		if(enemy.Name.Contains("Dummy"))
 		{
 			enemyname = "dummy";
+			enemyhealth = 20;
 			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/dummy.tscn");
 			Node temp = enemypacked.Instance();
 			GetNode("enemies").AddChild(temp);
@@ -433,6 +374,7 @@ public class battle : Node2D
 		}
 		else if(enemy.Name.Contains("clown"))
 		{
+			enemyhealth = 40;
 			enemyname = "clown";
 			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/clown.tscn"); 
 			Node temp = enemypacked.Instance();
@@ -442,6 +384,7 @@ public class battle : Node2D
 		}
 		else if(enemy.Name.Contains("lion"))
 		{
+			enemyhealth = 75;
 			enemyname = "lion";
 			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/lion.tscn"); 
 			Node temp = enemypacked.Instance();
@@ -451,6 +394,7 @@ public class battle : Node2D
 		}
 		else if(enemy.Name.Contains("pirate"))
 		{
+			enemyhealth = 50;
 			enemyname = "pirate";
 			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/pirate.tscn"); 
 			Node temp = enemypacked.Instance();
@@ -460,6 +404,7 @@ public class battle : Node2D
 		}
 		else if(enemy.Name.Contains("octopus"))
 		{
+			enemyhealth = 80;
 			enemyname = "octopus";
 			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/octopus.tscn"); 
 			Node temp = enemypacked.Instance();
@@ -469,6 +414,7 @@ public class battle : Node2D
 		}
 		else if(enemy.Name.Contains("ghost"))
 		{
+			enemyhealth = 65;
 			enemyname = "ghost";
 			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/dragon.tscn"); 
 			Node temp = enemypacked.Instance();
@@ -478,6 +424,7 @@ public class battle : Node2D
 		}
 		else if(enemy.Name.Contains("dragon"))
 		{
+			enemyhealth = 100;
 			enemyname = "dragon";
 			var enemypacked = GD.Load<PackedScene>("res://battle/enemies/dragon.tscn"); 
 			Node temp = enemypacked.Instance();
@@ -485,6 +432,8 @@ public class battle : Node2D
 			Node2D enemy2d = (Node2D) temp;
 			enemy2d.Position = new Vector2(200, 115);
 		}
+		GetNode<ProgressBar>("enemyhealth/ProgressBar").Set("max_value", enemyhealth);
+		GD.Print("enemy health: " + enemyhealth);
 	}
 
 	public void playerchosen(string result)
@@ -495,7 +444,12 @@ public class battle : Node2D
 			playerchose = "attack";
 			EmitSignal("chosen");
 			GD.Print("player chose " + playerchose);
-
+		}
+		else if(result == "shoot")
+		{
+			playerchose = "shoot";
+			EmitSignal("chosen");
+			GD.Print("player chose " + playerchose);
 		}
 		else if(result == "block")
 		{

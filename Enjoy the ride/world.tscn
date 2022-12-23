@@ -1,11 +1,11 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://world.cs" type="Script" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Pixel Art Achtergronden/SouvenirShop.png" type="Texture" id=3]
 [ext_resource path="res://Pixel Art Achtergronden/EntranceBackground.png" type="Texture" id=4]
 [ext_resource path="res://Pixel Art Achtergronden/EntranceForeground.png" type="Texture" id=5]
-[ext_resource path="res://Pixel Art Achtergronden/Bunny.png" type="Texture" id=6]
+[ext_resource path="res://Pixel art Objects/Objects/Bunny.png" type="Texture" id=6]
 [ext_resource path="res://Pixel Art Achtergronden/Entrance.png" type="Texture" id=7]
 [ext_resource path="res://pixel art karakters/dummy/dummy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Pixel Art Achtergronden/Fence.png" type="Texture" id=9]
@@ -26,6 +26,12 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 231.5, 17.125 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 4
+glow_intensity = 0.0
+glow_strength = 0.1
+glow_blend_mode = 0
 
 [node name="world" type="Node2D"]
 position = Vector2( 224, 192 )
@@ -86,6 +92,7 @@ texture = ExtResource( 13 )
 [node name="Map" type="Sprite" parent="YSort"]
 position = Vector2( 523, 341 )
 scale = Vector2( 2, 2 )
+z_index = 2
 texture = ExtResource( 16 )
 
 [node name="Fence" type="Sprite" parent="YSort"]
@@ -176,6 +183,7 @@ texture = ExtResource( 3 )
 
 [node name="Bunny" type="Sprite" parent="YSort/SouvenirShop"]
 position = Vector2( 177, -54.5 )
+z_index = 1
 z_as_relative = false
 texture = ExtResource( 6 )
 
@@ -259,6 +267,9 @@ polygon = PoolVector2Array( -928, 3, 116, 3, 116, -12, -928, -13 )
 position = Vector2( -217, 687 )
 z_index = 3
 polygon = PoolVector2Array( 97, -4, 111, 6, 995, -877, 987, -882 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
 
 [editable path="playercam"]
 [editable path="YSort/player"]

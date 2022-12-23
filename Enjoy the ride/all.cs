@@ -12,18 +12,21 @@ public class all : Control
 		World,
 		Map,
 		Menu,
+		Gameover,
 		
 	}
 	private PackedScene world;
 	private PackedScene battle;
 
 	private Node enemy;
+	private string enemytoremove;
 
 	private Node battlenode;
 
-	private load _currentload;
+	private load _currentload = load.World;
 
 	private Vector2 playerlocation = new Vector2(0,0);
+	private bool help = false;
 	private load Currentload 
 	{
 		get {return _currentload;}
@@ -35,14 +38,14 @@ public class all : Control
 
 			battle battlescript;
 
-			if (previousload == load.World)
-			{
-				worldinstance = GetNode("world");
-				playerlocation = worldinstance.GetNode<player>("YSort/player").Position;
-			}
 			switch (_currentload)
 			{
 				case load.World:
+					if (previousload == load.Battle)
+					{
+						GetNode<Node>("world/YSort/enemies/" + enemytoremove).QueueFree();
+					}
+
 					if (GetNodeOrNull("world") == null)
 					{
 						worldinstance = world.Instance();
@@ -53,11 +56,9 @@ public class all : Control
 						worldinstance = GetNode("world");
 						GetNode<Node2D>("world").Show();
 					}
+
 					worldinstance.GetNode<Camera2D>("playercam").Current = true;
-					// foreach (dragon N in worldinstance.GetNode<Node>("YSort/enemies").GetChildren())
-					// {
-					// 	N.Connect("touched", this, "start_battle");
-					// }
+
 					foreach (dummy D in worldinstance.GetNode<Node>("YSort/enemies").GetChildren())
 					{
 						D.Connect("touched", this, "start_battle");
@@ -82,6 +83,10 @@ public class all : Control
 					battlescript = battlenode as battle;
 					battlescript.spawnenemy(enemy);
 					g.scene = "battle";
+					GetNode<battle>("battle").Connect("battle_end", this, "battle_end");
+					break;
+				case load.Gameover:
+					GetTree().ChangeScene("res://gameover.tscn");
 					break;
 			}
 		}
@@ -123,6 +128,22 @@ public class all : Control
 
 	public override void _Process(float delta)
 	{
+		if (help)
+		{
+			if (GetNode<Node2D>("GUI/top/Helpmenu").Position.y < 4)
+			{
+				GetNode<Node2D>("GUI/top/Helpmenu").Position += new Vector2(0,50) * delta;
+				GD.Print(GetNode<Node2D>("GUI/top/Helpmenu").Position);
+			}
+		}
+		else if (!help)
+		{
+			if (GetNode<Node2D>("GUI/top/Helpmenu").Position.y > -88)
+			{
+				GetNode<Node2D>("GUI/top/Helpmenu").Position -= new Vector2(0,50) * delta;
+				GD.Print(GetNode<Node2D>("GUI/top/Helpmenu").Position);
+			}
+		}
 		if (Input.IsActionJustPressed("Talk"))
 		{
 			if ((bool)speechtotextobj.Call("can_speak"))
@@ -144,6 +165,17 @@ public class all : Control
 					result = (result, "completed");
 				}
 				GD.Print("Recognized: " + result);
+				
+				if (result.ToString() == "help")
+				{
+					help = true;
+				}
+
+				if (result.ToString() == "close")
+				{
+					help = false;
+				}
+
 				string[] strings = {"forward","backwards","left","right","stop"};
 				if (strings.Any(result.ToString().Contains) && _currentload == load.World)
 				{
@@ -167,4 +199,11 @@ public class all : Control
 		Currentload = load.Battle;
 	}
 
+	public void battle_end()
+	{
+		GetNode("transition");
+		// Currentload = load.World;
+		// enemytoremove = enemy.Name;
+		// enemy = null;
+	}
 }
