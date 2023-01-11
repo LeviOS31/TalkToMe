@@ -117,6 +117,7 @@ public class battle : Node2D
 	private async void playerturn()
 	{
 		await ToSignal(this, "chosen");
+		GetNode<Label>("labelplayer").Text = playerchose;
 		Currentturn = turn.enemy;
 	}
 
@@ -124,6 +125,7 @@ public class battle : Node2D
 	{
 		enemyattack();
 		await ToSignal(GetNode<Timer>("Timer"), "timeout");
+		GetNode<Label>("labelenemy").Text = enemychose;
 		Currentturn = turn.execute;
 	}
 
@@ -136,13 +138,12 @@ public class battle : Node2D
 
 		if (playerchose == "attack" || playerchose == "shoot")
 		{
-
-			if(playerchose == "attack")
+			if(playerchose == "attack" )
 			{
 				GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
 				playerdamage = playerattack.calc();
 			}
-			else if (playerchose == "shoot")
+			else
 			{
 				GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayerDog").Play("shoot");
 				playerdamage = dogattack.calc();
@@ -181,7 +182,14 @@ public class battle : Node2D
 				int num = 100 - enemydefence;
 				playerdamage = (int)Math.Ceiling((playerdamage) / 100.00 * (num));
 			}
-			await ToSignal(GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer"), "animation_finished");
+			if (playerchose == "attack")
+			{
+				await ToSignal(GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer"), "animation_finished");
+			}
+			else
+			{
+				await ToSignal(GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayerDog"), "animation_finished");
+			}
 			GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayer").Play("idle");
 			GetNode<Node>("player").GetNode<AnimationPlayer>("AnimationPlayerDog").Play("idle");
 
@@ -196,11 +204,12 @@ public class battle : Node2D
 				{
 					GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("hit/HitPlayer").Play("blunt");
 				}
-				// else if (playerchose == "shoot")
-				// {
-				// 	GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("hit/HitPlayer").Play("laser");
-				// }
-			}else
+				else if (playerchose == "shoot")
+				{
+					GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("hit/HitPlayer").Play("blunt"); //TODO: make lazer hit animation
+				}
+			}
+			else
 			{
 				GetNode<Node>("enemies").GetChild(0).GetNode<AnimationPlayer>("hit/HitPlayer").Play("defend");
 			}
@@ -278,6 +287,9 @@ public class battle : Node2D
 
 			GetNode("player").GetNode<AnimationPlayer>("hit/HitPlayer").Play("none");
 
+			GetNode<Label>("labelenemy").Text = "";
+			GetNode<Label>("labelplayer").Text = ""; 
+
 			Node text = damagenumbers.Instance();
 			GetNode<Node>("player").AddChild(text);
 			text.GetNode<Label>("Label").Text = enemydamage.ToString();
@@ -295,6 +307,7 @@ public class battle : Node2D
 		Currentturn = turn.player;
 		if(enemyhealth < 0)
 		{
+			GD.Print("enemy dead");
 			EmitSignal("battle_end");
 		}
 	}

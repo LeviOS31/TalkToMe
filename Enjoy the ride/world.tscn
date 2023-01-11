@@ -2,27 +2,27 @@
 
 [ext_resource path="res://world.cs" type="Script" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Pixel Art Achtergronden/SouvenirShop.png" type="Texture" id=3]
-[ext_resource path="res://Pixel Art Achtergronden/EntranceBackground.png" type="Texture" id=4]
+[ext_resource path="res://ShadedEntranceObjects/SouvenirShop.png" type="Texture" id=3]
+[ext_resource path="res://ShadedEntranceObjects/ShadedFloorfull.png" type="Texture" id=4]
 [ext_resource path="res://Pixel Art Achtergronden/EntranceForeground.png" type="Texture" id=5]
-[ext_resource path="res://Pixel art Objects/Objects/Bunny.png" type="Texture" id=6]
-[ext_resource path="res://Pixel Art Achtergronden/Entrance.png" type="Texture" id=7]
+[ext_resource path="res://ShadedEntranceObjects/Bunny.png" type="Texture" id=6]
+[ext_resource path="res://ShadedEntranceObjects/Tree3.png" type="Texture" id=7]
 [ext_resource path="res://pixel art karakters/dummy/dummy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Pixel Art Achtergronden/Fence.png" type="Texture" id=9]
 [ext_resource path="res://playercam.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Pixel Art Achtergronden/Bushes.png" type="Texture" id=11]
+[ext_resource path="res://ShadedEntranceObjects/Tree.png" type="Texture" id=11]
 [ext_resource path="res://transitionscene.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Pixel Art Achtergronden/FallenTree.png" type="Texture" id=13]
-[ext_resource path="res://Pixel Art Achtergronden/Restrooms.png" type="Texture" id=14]
-[ext_resource path="res://Pixel Art Achtergronden/Fountain.png" type="Texture" id=15]
-[ext_resource path="res://Pixel Art Achtergronden/Map.png" type="Texture" id=16]
-[ext_resource path="res://Pixel Art Achtergronden/StreetLight2.png" type="Texture" id=17]
-[ext_resource path="res://Pixel Art Achtergronden/Thrashcan.png" type="Texture" id=18]
-[ext_resource path="res://Pixel Art Achtergronden/StreetLight1.png" type="Texture" id=19]
+[ext_resource path="res://ShadedEntranceObjects/Entrance.png" type="Texture" id=13]
+[ext_resource path="res://ShadedEntranceObjects/FallenTree.png" type="Texture" id=14]
+[ext_resource path="res://ShadedEntranceObjects/Fountain.png" type="Texture" id=15]
+[ext_resource path="res://ShadedEntranceObjects/Map.png" type="Texture" id=16]
+[ext_resource path="res://ShadedEntranceObjects/StreetLight2.png" type="Texture" id=17]
+[ext_resource path="res://ShadedEntranceObjects/Bushes.png" type="Texture" id=18]
+[ext_resource path="res://ShadedEntranceObjects/StreetLight1.png" type="Texture" id=19]
 [ext_resource path="res://Pixel Art Achtergronden/SideFence.png" type="Texture" id=20]
-[ext_resource path="res://Pixel Art Achtergronden/Tree2.png" type="Texture" id=21]
-[ext_resource path="res://Pixel Art Achtergronden/Tree3.png" type="Texture" id=22]
-[ext_resource path="res://Pixel Art Achtergronden/Tree.png" type="Texture" id=23]
+[ext_resource path="res://ShadedEntranceObjects/Tree2.png" type="Texture" id=21]
+[ext_resource path="res://ShadedEntranceObjects/Thrashcan.png" type="Texture" id=22]
+[ext_resource path="res://ShadedEntranceObjects/Restrooms.png" type="Texture" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 231.5, 17.125 )
@@ -87,10 +87,10 @@ position = Vector2( 601, 156 )
 scale = Vector2( 2, 2 )
 z_index = 1
 z_as_relative = false
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 
 [node name="Map" type="Sprite" parent="YSort"]
-position = Vector2( 523, 341 )
+position = Vector2( 524, 344 )
 scale = Vector2( 2, 2 )
 z_index = 2
 texture = ExtResource( 16 )
@@ -106,20 +106,20 @@ texture = ExtResource( 9 )
 position = Vector2( 1261, -126 )
 scale = Vector2( 2, 2 )
 z_as_relative = false
-texture = ExtResource( 22 )
+texture = ExtResource( 7 )
 
 [node name="Bushes" type="Sprite" parent="YSort"]
 position = Vector2( 906, 109 )
 scale = Vector2( 2, 2 )
 z_index = 2
 z_as_relative = false
-texture = ExtResource( 11 )
+texture = ExtResource( 18 )
 
 [node name="Tree" type="Sprite" parent="YSort"]
 position = Vector2( 1097, -41 )
 scale = Vector2( 2, 2 )
 z_as_relative = false
-texture = ExtResource( 23 )
+texture = ExtResource( 11 )
 
 [node name="Tree2" type="Sprite" parent="YSort"]
 position = Vector2( 947, -131 )
@@ -131,7 +131,7 @@ texture = ExtResource( 21 )
 position = Vector2( 901, 368 )
 scale = Vector2( 2, 2 )
 z_as_relative = false
-texture = ExtResource( 18 )
+texture = ExtResource( 22 )
 
 [node name="SideFence" type="Sprite" parent="YSort"]
 position = Vector2( 625, 358 )
@@ -144,7 +144,7 @@ position = Vector2( 625, 358 )
 scale = Vector2( 2, 2 )
 z_index = 2
 z_as_relative = false
-texture = ExtResource( 7 )
+texture = ExtResource( 13 )
 
 [node name="Fountain" type="Sprite" parent="YSort"]
 position = Vector2( 825, 235 )
@@ -168,11 +168,11 @@ z_as_relative = false
 texture = ExtResource( 19 )
 
 [node name="Restrooms" type="Sprite" parent="YSort"]
-position = Vector2( 852, 495 )
+position = Vector2( 853, 495 )
 scale = Vector2( 2, 2 )
 z_index = 2
 z_as_relative = false
-texture = ExtResource( 14 )
+texture = ExtResource( 23 )
 
 [node name="SouvenirShop" type="Sprite" parent="YSort"]
 position = Vector2( 275, 465 )

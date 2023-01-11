@@ -202,8 +202,8 @@ public class all : Control
 	public void battle_end()
 	{
 		GetNode("transition");
-		// Currentload = load.World;
-		// enemytoremove = enemy.Name;
-		// enemy = null;
+		Currentload = load.World;
+		enemytoremove = enemy.Name;
+		enemy = null;
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://battle/player/player_battle.cs" type="Script" id=1]
 [ext_resource path="res://battle/player/man-battle.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://pixel art karakters/max/animationdog.png" type="Texture" id=6]
 [ext_resource path="res://pixel art karakters/max/animationdogemmisionmap.png" type="Texture" id=7]
 [ext_resource path="res://blood.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sounds/baseballbat.wav" type="AudioStream" id=9]
+[ext_resource path="res://sounds/laser.wav" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -23,6 +25,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("attack:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -95,6 +109,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 2, 3, 4, 5, 6, 7 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("lazer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Environment" id=5]
 background_mode = 4
@@ -128,6 +154,7 @@ scale = Vector2( 0.666667, 0.666667 )
 z_index = 1
 texture = ExtResource( 6 )
 hframes = 8
+frame = 7
 
 [node name="MediumShadow" type="Sprite" parent="dog"]
 position = Vector2( -9.75, 23.125 )
@@ -147,6 +174,14 @@ rotation = 3.14159
 
 [node name="CPUParticles2D" parent="blood" index="0"]
 gravity = Vector2( 0, -98 )
+
+[node name="lazer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+volume_db = -10.0
+
+[node name="attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -20.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
